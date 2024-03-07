@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Protfolio Website</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/dfc8e289de.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <div id="header">
+            <div class="container">
+                <nav>
+                    <img src="images/logo.png" class="logo">
+                    <ul id="sidemenu">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#portfolio">Portfolio</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <i class="fa-solid fa-xmark " onclick="closemenu()"></i> 
+                    </ul>
+                    <i id="opened" class="fa-solid fa-bars" onclick="openmenu()"></i>
+                </nav>
+                <div class="header-text">
+                    <p>Web Developer</p>
+                    <h1>Hi, I am <br><span>Richmond</span> </h1>
+                </div>
+            </div>
+        </div>
+        <!-- --------------------about---------------------------- -->
+        <div id="about" class="hidden">
+            <div class="container">
+                <div class="row">
+                    <div class="about-col-1">
+                        <img src="images/Profile_2.jpg" alt="Picture of Richmmond">
+                    </div>
+                    <div class="about-col-2">
+                        <h1 class="sub-title">About Me</h1>
+                        <p>As a seasoned web developer and creative thinker, I thrive on the challenges of turning ideas into reality in the digital world. With a deep-rooted passion for technology and a relentless pursuit of excellence, I bring a wealth of experience and expertise to every project I undertake.</p>
+                        <br>
+                        <p>In essence, I'm more than just a web developer—I'm a visionary, a problem solver, and a creative force driving positive change in the digital landscape. I'm dedicated to making the web a better place, one project at a time, and I can't wait to embark on this journey with you.</p>
+                        <div class="tab-titles">
+                            <p class="tab-links active" onclick="opentab('skills')" >Skills</p>
+                            <p class="tab-links" onclick="opentab('experience')">Experience</p>
+                            <p class="tab-links" onclick="opentab('education')">Education</p>
+                        </div>
+                        <div class="tab-contents active-tab" id="skills"> 
+                            <ul >
+                                <li><span>UI/UX</span><br>Designing Web/App Interfaces</li>
+                                <li><span>Web Development</span><br>Web Application Development</li>
+                                <li><span>App Development</span><br>Building Android/IOS apps</li>
+                            </ul>
+                        </div>
+                        <div class="tab-contents" id="experience"> 
+                            <ul >
+                                <li><span>UI/UX</span><br>Designing Web/App Interfaces</li>
+                                <li><span>Web Development</span><br>Web Application Development</li>
+                                <li><span>App Development</span><br>Building Android/IOS apps</li>
+                            </ul>
+                    </div>
+                    <div class="tab-contents"id="education"> 
+                        <ul >
+                            <li><span>UI/UX</span><br>Designing Web/App Interfaces</li>
+                            <li><span>Web Development</span><br>Web Application Development</li>
+                            <li><span>App Development</span><br>Building Android/IOS apps</li>
+                        </ul>
+                </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- -------services----------- -->
+        <div id="services" class="hidden">
+            <div class="container">
+                <h1 class="sub-title">My Services</h1>
+                <div class="services-list">
+                    <div class="hidden">
+                        <i class="fa-solid fa-code"></i>
+                        <h2>Web Design</h2>
+                        <p>Transform your ideas into stunning websites with our professional web design services. We focus on creating visually appealing and user-friendly interfaces that captivate your audience and enhance your online presence.</p>
+                        <a href="">Learn More</a>
+                    </div>
+
+                    <div class="hidden">
+                        <i class="fa-solid fa-crop-simple"></i>
+                        <h2>UI/UX Design</h2>
+                        <p>Elevate your digital products with our UI/UX design expertise. We combine creativity and usability to deliver intuitive and engaging user experiences across web and mobile platforms. Let us help you create designs that delight users and drive results.</p>
+                        <a href="">Learn More</a>
+                    </div>
+                        
+                    <div class="hidden">
+                        <i class="fa-brands fa-app-store"></i>
+                        <h2>App Design</h2>
+                        <p>Bring your app ideas to life with our custom app design solutions. Whether you're developing a mobile application for iOS or Android, we specialize in creating sleek and intuitive interfaces that maximize user engagement and retention.</p>
+                        <a href="">Learn More</a>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ----------------------portfolio---------------- -->
+
+        <div id="portfolio" class="hidden">
+            <div class="container">
+                <h1 class="sub-title">My Work</h1>
+                <div class="work-list">
+                    <div class="work">
+                        <img src="images/Social_Media.jpg" alt="">
+                        <div class="layer">
+                            <h3>Social Media App</h3>
+                            <p>Designed and developed a cutting-edge social media app that connects users around the world. The app features a modern and intuitive interface, advanced privacy controls, and seamless sharing functionality.</p>
+                            <a href="#"><i class="fa-solid fa-link"></i></a>
+                        </div>
+                    </div>
+                    <div class="work">
+                        <img src="images/music_app.jpg" alt="">
+                        <div class="layer">
+                            <h3>Music App</h3>
+                            <p>Created a dynamic music app that provides users with access to their favorite songs and artists anytime, anywhere. With personalized playlists, curated recommendations, and offline listening capabilities, the app offers a premium music streaming experience.</p>
+                            <a href="#"><i class="fa-solid fa-link"></i></a>
+                        </div>
+                    </div>
+                    <div class="work">
+                        <img src="images/e-commerce.jpg" alt="">
+                        <div class="layer"> 
+                            <h3>E-Commerce App</h3>
+                            <p>Launched an innovative e-commerce app that revolutionizes the way people shop online. The app offers a seamless shopping experience, featuring product recommendations, secure payment options, and real-time order tracking.</p>
+                            <a href="#"><i class="fa-solid fa-link"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <a href="#" class="btn">See more</a>
+            </div>
+        </div>
+
+        <div class="prelude" class="hidden">
+            <p><span>Have a project in mind or just want to say hello?</span><br><br>Feel free to reach out to me using the contact form below. <br><br>Let's turn your ideas into reality</p>
+        </div>
+
+        <!-- ----------------contact---------------- -->
+        <div id="contact" class="hidden">
+            <div class="container">
+                <div class="row">
+                    <div class="contact-left">
+                        <h1 class="sub-title">Contact Me</h1>
+                        <p><i class="fa-solid fa-paper-plane"></i>richmondazadze1313@gmail.com</p>
+                        <p><i class="fa-solid fa-phone"></i>+233596047660</p>
+                        <div class="social-icons">
+                            <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                            <a href="#"><i class="fa-brands fa-square-x-twitter"></i></a>
+                            <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                        </div>
+                        <a href="images/my-cv.pdf" download class="btn btn2">Download CV</a>
+                    </div>
+                    <div class="contact-right">
+                        <form name="submit-to-google-sheet">
+                            <input type="text" name="Name" placeholder="Your Name" required>
+                            <input type="email" name="Email" placeholder="Your email" required>
+                            <textarea name="Message" rows="6" placeholder="Your message"></textarea>
+                            <button type="submit" class="btn btn2"
+                            >Submit</button>
+                        </form>
+                        <span id="msg"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>Copyright <i class="fa-regular fa-copyright"></i> Richmond_Azadze  </p>
+            </div>
+        </div>
+    </div>
+
+
+
+<script>
+
+    var tablinks = document.getElementsByClassName("tab-links")
+    var tabcontents = document.getElementsByClassName("tab-contents")
+
+    function opentab(tabname) {
+        for (tablink of tablinks) {
+            tablink.classList.remove("active")
+        }
+        for (tabcontent of tabcontents) {
+            tabcontent.classList.remove("active-tab")
+        }
+
+        event.currentTarget.classList.add('active');
+        document.getElementById(tabname).classList.add("active-tab")
+    } 
+    
+</script>
+
+<script>
+    var sidemenu = document.getElementById('sidemenu');
+    var opened = document.getElementById('opened');
+
+
+    function openmenu() {
+        sidemenu.style.right = "0";
+        opened.style.right = "-200px";
+    }
+
+    function closemenu() {
+        sidemenu.style.right = "-200px";
+        opened.style.right = "";
+    }
+</script>
+
+<script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxh3ZppzgTjsO6cHFUbdMW9TUXmHem7Uz1VWVsv_On9Af6imb4B_CunkVkJHX_q9U6_/exec'
+    const form = document.forms['submit-to-google-sheet']
+    const msg = document.getElementById("msg")
+
+    form.addEventListener('submit', e => {
+    e.preventDefault()
+    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+      .then(response => {
+        msg.innerHTML = "Message sent succesfully"
+        setTimeout(function() {
+            msg.innerHTML = ""
+        },5000)
+        form.reset()
+      })
+      .catch(error => console.error('Error!', error.message))
+  })
+</script>
+
+<script>
+const obserever = new IntersectionObserver( (entries) => {
+    entries.forEach((entry) => {
+        console.log(entry)
+        if (entry.isIntersecting) {
+            entry.target.classList.add('show');
+        } else {
+            entry.target.classList.remove('show');
+        }
+    });
+});
+
+
+const hiddenElements = document.querySelectorAll('.hidden');
+hiddenElements.forEach((el) => obserever.observe(el));
+</script>
+
+</body>
+
+
+</html>
