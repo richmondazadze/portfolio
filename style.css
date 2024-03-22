@@ -186,11 +186,18 @@ nav ul li a:hover::after {
 .tab-contents ul li {
   list-style: none;
   margin: 10px 0;
+  margin-right: 30px;
 }
 
 .tab-contents ul li span {
-  color: #b54769;
-  font-size: 14px;
+  color: #ffffff;
+  font-size: 15px;
+  text-align: center;
+}
+
+.tab-contents ul li span:nth-child(1) {
+  color: #ff0051;
+  font-size: 16px;
 }
 
 .tab-contents {
@@ -199,6 +206,45 @@ nav ul li a:hover::after {
 
 .tab-contents.active-tab {
   display: block;
+}
+
+.card {
+  background: linear-gradient(
+    45deg,
+    #ff0051b8,
+    #ff4b2bb8,
+    rgba(255, 255, 255, 0.755)
+  );
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 50px;
+  width: 95px;
+  height: 95px;
+  text-align: center;
+  margin-right: 30px;
+  transition: 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+}
+
+.card:last-child {
+  margin-right: 0;
+}
+
+.card i {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #192590;
+  text-align: center;
+}
+
+.card-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 /* ---------services------- */

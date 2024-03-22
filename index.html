@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Protfolio Website</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-sHvqPOyr7DuHavwkGIRflYHz1uW6Oowu/DvpsQ1T0d6cI5ULQ3D4Z6u7XNLDUU19RQ5C6CyJRR9LlMvW0E5X1Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://kit.fontawesome.com/dfc8e289de.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -43,8 +44,7 @@
                         <p>In essence, I'm more than just a web developer—I'm a visionary, a problem solver, and a creative force driving positive change in the digital landscape. I'm dedicated to making the web a better place, one project at a time, and I can't wait to embark on this journey with you.</p>
                         <div class="tab-titles">
                             <p class="tab-links active" onclick="opentab('skills')" >Skills</p>
-                            <p class="tab-links" onclick="opentab('experience')">Experience</p>
-                            <p class="tab-links" onclick="opentab('education')">Education</p>
+                            <p class="tab-links" onclick="opentab('experience')">Tech Stack</p>
                         </div>
                         <div class="tab-contents active-tab" id="skills"> 
                             <ul >
@@ -54,10 +54,18 @@
                             </ul>
                         </div>
                         <div class="tab-contents" id="experience"> 
-                            <ul >
-                                <li><span>UI/UX</span><br>Designing Web/App Interfaces</li>
-                                <li><span>Web Development</span><br>Web Application Development</li>
-                                <li><span>App Development</span><br>Building Android/IOS apps</li>
+                            <ul class="card-list">
+                                <li class="card"><i class="fab fa-html5"></i><br /><span class="tt">HTML</span></li>
+                                <li class="card"><i class="fab fa-css3-alt"></i><br /><span class="tt">CSS</span></li>
+                                <li class="card"><i class="fab fa-js"></i><br /><span class="tt">JavaScript</span></li>
+                                <li class="card"><i class="fab fa-react"></i><br /><span class="tt">React</span></li>
+                                <li class="card"><i class="fab fa-bootstrap"></i><br /><span class="tt">Bootstrap</span></li>
+                                <li class="card"><i class="fab fa-node-js"></i><br /><span class="tt">Next.js</span></li>
+                                <li class="card"><i class="fab fa-react"></i><br /><span class="tt">T-Script</span></li>
+                                <li class="card"><i class="fas fa-database"><br /></i><span class="tt">MongoDB</span></li>
+                                <li class="card"><i class="fas fa-code"></i><br /><span class="tt">Tailwind CSS</span></li>
+                                <li class="card"><i class="fab fa-react"></i><br /><span class="tt">Redux</span></li>
+                                <li class="card"><i class="fas fa-server"></i><br /><span class="tt">Rapid API</span></li>
                             </ul>
                     </div>
                     <div class="tab-contents"id="education"> 
