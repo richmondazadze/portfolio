@@ -183,7 +183,7 @@ const Home = () => {
 
   // Lottie configuration
   const lottieOptions = {
-    src: "/animation.lottie",
+    src: "/animation.json",
     loop: true,
     autoplay: true,
     rendererSettings: {
