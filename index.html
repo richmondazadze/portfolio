@@ -1,265 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Richmond Azadze</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-sHvqPOyr7DuHavwkGIRflYHz1uW6Oowu/DvpsQ1T0d6cI5ULQ3D4Z6u7XNLDUU19RQ5C6CyJRR9LlMvW0E5X1Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://kit.fontawesome.com/dfc8e289de.js" crossorigin="anonymous"></script>
-</head>
-<body>
-    <div class="wrapper">
-        <div id="header">
-            <div class="container">
-                <nav>
-                    <img src="images/logo.png" class="logo">
-                    <ul id="sidemenu">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#services">Services</a></li>
-                        <li><a href="#portfolio">Portfolio</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                        <i class="fa-solid fa-xmark " onclick="closemenu()"></i> 
-                    </ul>
-                    <i id="opened" class="fa-solid fa-bars" onclick="openmenu()"></i>
-                </nav>
-                <div class="header-text">
-                    <p>Web Developer</p>
-                    <br>
-                    <h1>Hi, I am <br><span>Richmond</span> </h1>
-                </div>
-            </div>
-        </div>
-        <!-- --------------------about---------------------------- -->
-        <div id="about" class="hidden">
-            <div class="container">
-                <div class="row">
-                    <div class="about-col-1">
-                        <img src="images/Profile_2.jpg" alt="Picture of Richmmond">
-                    </div>
-                    <div class="about-col-2">
-                        <h1 class="sub-title">About Me</h1>
-                        <p>As a seasoned web developer and creative thinker, I thrive on the challenges of turning ideas into reality in the digital world. With a deep-rooted passion for technology and a relentless pursuit of excellence, I bring a wealth of experience and expertise to every project I undertake.</p>
-                        <br>
-                        <p>In essence, I'm more than just a web developer—I'm a visionary, a problem solver, and a creative force driving positive change in the digital landscape. I'm dedicated to making the web a better place, one project at a time, and I can't wait to embark on this journey with you.</p>
-                        <div class="tab-titles">
-                            <p class="tab-links active" onclick="opentab('skills')" >Skills</p>
-                            <p class="tab-links" onclick="opentab('experience')">Tech Stack</p>
-                        </div>
-                        <div class="tab-contents active-tab" id="skills"> 
-                            <ul >
-                                <li><span>UI/UX</span><br>Designing Web/App Interfaces</li>
-                                <li><span>Web Development</span><br>Web Application Development</li>
-                                <li><span>App Development</span><br>Building Android/IOS apps</li>
-                            </ul>
-                        </div>
-                        <div class="tab-contents" id="experience"> 
-                            <ul class="card-list">
-                                <li class="card"><i class="fab fa-html5"></i><br /><span class="tt">HTML</span></li>
-                                <li class="card"><i class="fab fa-css3-alt"></i><br /><span class="tt">CSS</span></li>
-                                <li class="card"><i class="fab fa-js"></i><br /><span class="tt">JavaScript</span></li>
-                                <li class="card"><i class="fab fa-react"></i><br /><span class="tt">React</span></li>
-                                <li class="card"><i class="fab fa-bootstrap"></i><br /><span class="tt">Bootstrap</span></li>
-                                <li class="card"><i class="fab fa-node-js"></i><br /><span class="tt">Next.js</span></li>
-                                <li class="card"><i class="fab fa-react"></i><br /><span class="tt">T-Script</span></li>
-                                <li class="card"><i class="fas fa-database"><br /></i><span class="tt">MongoDB</span></li>
-                                <li class="card"><i class="fas fa-code"></i><br /><span class="tt">Tailwind CSS</span></li>
-                                <li class="card"><i class="fab fa-react"></i><br /><span class="tt">Redux</span></li>
-                                <li class="card"><i class="fas fa-server"></i><br /><span class="tt">Rapid API</span></li>
-                            </ul>
-                    </div>
-                    <div class="tab-contents"id="education"> 
-                        <ul >
-                            <li><span>UI/UX</span><br>Designing Web/App Interfaces</li>
-                            <li><span>Web Development</span><br>Web Application Development</li>
-                            <li><span>App Development</span><br>Building Android/IOS apps</li>
-                        </ul>
-                </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- -------services----------- -->
-        <div id="services" class="hidden">
-            <div class="container">
-                <h1 class="sub-title">My Services</h1>
-                <div class="services-list">
-                    <div class="hidden">
-                        <i class="fa-solid fa-code"></i>
-                        <h2>Web Design</h2>
-                        <p>Transform your ideas into stunning websites with our professional web design services. We focus on creating visually appealing and user-friendly interfaces that captivate your audience and enhance your online presence.</p>
-                        <a href="">Learn More</a>
-                    </div>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/Photo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Richmond Azadze" />
+    <meta
+      name="description"
+      content="Richmond Azadze - Full Stack Developer. Welcome to my portfolio website! I focus on creating engaging and responsive user interfaces."
+    />
+    <meta
+      name="keywords"
+      content="Richmond, Richmond Azadze, Full Stack developer, web developer, portfolio, technology"
+    />
+    <meta name="mobile-web-app-capable" content="yes" />
 
-                    <div class="hidden">
-                        <i class="fa-solid fa-crop-simple"></i>
-                        <h2>UI/UX Design</h2>
-                        <p>Elevate your digital products with our UI/UX design expertise. We combine creativity and usability to deliver intuitive and engaging user experiences across web and mobile platforms. Let us help you create designs that delight users and drive results.</p>
-                        <a href="">Learn More</a>
-                    </div>
-                        
-                    <div class="hidden">
-                        <i class="fa-brands fa-app-store"></i>
-                        <h2>App Design</h2>
-                        <p>Bring your app ideas to life with our custom app design solutions. Whether you're developing a mobile application for iOS or Android, we specialize in creating sleek and intuitive interfaces that maximize user engagement and retention.</p>
-                        <a href="">Learn More</a>
-                    </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.richmondazadze.me/" />
+    <meta property="og:title" content="Richmond Azadze - Full Stack Developer" />
+    <meta
+      property="og:description"
+      content="Welcome to my portfolio website! I focus on creating engaging and responsive user interfaces."
+    />
+    <meta
+      property="og:image"
+      content="https://www.richmondazadze.me/Meta.png"
+    />
 
-        <!-- ----------------------portfolio---------------- -->
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Richmond Azadze - Full Stack Developer"
+    />
+    <meta
+      name="twitter:description"
+      content="Welcome to my portfolio website! I focus on creating engaging and responsive user interfaces."
+    />
+    <meta
+      name="twitter:image"
+      content="https://www.richmondazadze.me/Meta.png"
+    />
 
-        <div id="portfolio" class="hidden">
-            <div class="container">
-                <h1 class="sub-title">My Work</h1>
-                <div class="work-list">
-                    <div class="work">
-                        <img src="images/ai-summarizer.png" alt="">
-                        <div class="layer">
-                            <h3>AI Summarier App</h3>
-                            <p>Designed and developed a cutting-edge AI summarizer app which summarizes long articles using advanced AI functionality.</p>
-                            <a href="https://richmondazadze.github.io/AI-Summarizer" target="_blank"><i class="fa-solid fa-link"></i></a>
-                        </div>
-                    </div>
-                    <div class="work">
-                        <img src="images/pt.png" alt="">
-                        <div class="layer"> 
-                            <h3>Finance Tracking App</h3>
-                            <p>Launched an innovative web app that revolutionizes the way people track thier income and expenses. The app offers a user experience, featuring expense report generation.</p>
-                            <a href="https://pennytrack.tech" target="_blank"><i class="fa-solid fa-link"></i></a>
-                        </div>
-                    </div>
-                    <div class="work">
-                        <img src="images/richverseecotech.png" alt="">
-                        <div class="layer">
-                            <h3>Web App for Startup</h3>
-                            <p>Created a dynamic web app for a tech company Richverseecotech to help with customer outreach and branding</p>
-                            <a href="http://richverseecotech.com/ target
-                            =_blank"><i class="fa-solid fa-link"></i></a>
-                        </div>
-                    </div>
-                    
-                </div>
-                <a href="#" class="btn">See more</a>
-            </div>
-        </div>
+    <title>Richmond Azadze - Full Stack Developer</title>
 
-        <div class="prelude" class="hidden">
-            <p><span>Have a project in mind or just want to say hello?</span><br><br>Feel free to reach out to me using the contact form below. <br><br>Let's turn your ideas into reality</p>
-        </div>
-
-        <!-- ----------------contact---------------- -->
-        <div id="contact" class="hidden">
-            <div class="container">
-                <div class="row">
-                    <div class="contact-left">
-                        <h1 class="sub-title">Contact Me</h1>
-                        <p><i class="fa-solid fa-paper-plane"></i>richmondazadze1313@gmail.com</p>
-                        <p><i class="fa-solid fa-phone"></i>+233596047660</p>
-                        <div class="social-icons">
-                            <a href="https://web.facebook.com/richmond.azadze.1/" target="_blank"><i class="fa-brands fa-facebook"></i></a>
-                            <a href="https://twitter.com/__richhimself"target="_blank"><i class="fa-brands fa-square-x-twitter"></i></a>
-                            <a href="https://www.linkedin.com/in/richmond-azadze/" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
-                            <a href="https://www.instagram.com/__richkay.himself" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-                        </div>
-                        <a href="images/my-cv.pdf" download class="btn btn2">Download CV</a>
-                    </div>
-                    <div class="contact-right">
-                        <form name="submit-to-google-sheet">
-                            <input type="text" name="Name" placeholder="Your Name" required>
-                            <input type="email" name="Email" placeholder="Your email" required>
-                            <textarea name="Message" rows="6" placeholder="Your message"></textarea>
-                            <button type="submit" class="btn btn2"
-                            >Submit</button>
-                        </form>
-                        <span id="msg"></span>
-                    </div>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>Copyright <i class="fa-regular fa-copyright"></i> Richmond_Azadze  </p>
-            </div>
-        </div>
-    </div>
-
-
-
-<script>
-
-    var tablinks = document.getElementsByClassName("tab-links")
-    var tabcontents = document.getElementsByClassName("tab-contents")
-
-    function opentab(tabname) {
-        for (tablink of tablinks) {
-            tablink.classList.remove("active")
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Richmond Azadze",
+        "url": "https://www.richmondazadze.me/",
+        "sameAs": [
+          "https://www.linkedin.com/in/richmond-azadze",
+          "https://github.com/richmondazadze"
+        ],
+        "jobTitle": "Full Stack Developer",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Freelancer"
         }
-        for (tabcontent of tabcontents) {
-            tabcontent.classList.remove("active-tab")
-        }
-
-        event.currentTarget.classList.add('active');
-        document.getElementById(tabname).classList.add("active-tab")
-    } 
-    
-</script>
-
-<script>
-    var sidemenu = document.getElementById('sidemenu');
-    var opened = document.getElementById('opened');
-
-
-    function openmenu() {
-        sidemenu.style.right = "0";
-        opened.style.right = "-200px";
-    }
-
-    function closemenu() {
-        sidemenu.style.right = "-200px";
-        opened.style.right = "";
-    }
-</script>
-
-<script>
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbxh3ZppzgTjsO6cHFUbdMW9TUXmHem7Uz1VWVsv_On9Af6imb4B_CunkVkJHX_q9U6_/exec'
-    const form = document.forms['submit-to-google-sheet']
-    const msg = document.getElementById("msg")
-
-    form.addEventListener('submit', e => {
-    e.preventDefault()
-    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-      .then(response => {
-        msg.innerHTML = "Message sent succesfully"
-        setTimeout(function() {
-            msg.innerHTML = ""
-        },5000)
-        form.reset()
-      })
-      .catch(error => console.error('Error!', error.message))
-  })
-</script>
-
-<script>
-const obserever = new IntersectionObserver( (entries) => {
-    entries.forEach((entry) => {
-        console.log(entry)
-        if (entry.isIntersecting) {
-            entry.target.classList.add('show');
-        } else {
-            entry.target.classList.remove('show');
-        }
-    });
-});
-
-
-const hiddenElements = document.querySelectorAll('.hidden');
-hiddenElements.forEach((el) => obserever.observe(el));
-</script>
-
-</body>
-
-
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
