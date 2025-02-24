@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build --legacy-peer-deps",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -58,5 +58,16 @@
     "tailwind-scrollbar": "^3.1.0",
     "tailwindcss": "^3.4.14",
     "vite": "^5.4.10"
+  },
+  "overrides": {
+    "react-swipeable-views": {
+      "react": "^18.0.0"
+    },
+    "react-swipeable-views-utils": {
+      "react": "^18.0.0",
+      "react-event-listener": {
+        "react": "^18.0.0"
+      }
+    }
   }
 }
