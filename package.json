@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build --legacy-peer-deps",
+    "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -31,8 +31,8 @@
     "gsap": "^3.12.5",
     "headlessui": "^0.0.0",
     "lucide-react": "^0.454.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "react-intersection-observer": "^9.13.1",
     "react-router-dom": "^6.29.0",
     "react-swipeable-views": "^0.14.0",
@@ -45,8 +45,8 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",
-    "@types/react": "^18.3.12",
-    "@types/react-dom": "^18.3.1",
+    "@types/react": "^17.0.50",
+    "@types/react-dom": "^17.0.17",
     "@vitejs/plugin-react": "^4.3.3",
     "autoprefixer": "^10.4.20",
     "eslint": "^9.13.0",
@@ -58,16 +58,5 @@
     "tailwind-scrollbar": "^3.1.0",
     "tailwindcss": "^3.4.14",
     "vite": "^5.4.10"
-  },
-  "overrides": {
-    "react-swipeable-views": {
-      "react": "^18.0.0"
-    },
-    "react-swipeable-views-utils": {
-      "react": "^18.0.0",
-      "react-event-listener": {
-        "react": "^18.0.0"
-      }
-    }
   }
 }
