@@ -201,17 +201,17 @@ const Home = () => {
   return (
     <div
       name="home"
-      className="h-screen w-full bg-gradient-to-b from-black via-black to-gray-800 pt-[5rem]"
+      className=" w-full bg-gradient-to-b from-black via-black to-gray-800 pt-[5rem]"
     >
       <div className="max-w-screen-lg mx-auto flex flex-col items-center justify-center min-h-[calc(100vh-5rem)] px-4 md:flex-row">
         <div className="flex flex-col lg:flex-row items-center justify-center h-screen md:justify-between gap-0 sm:gap-12 lg:gap-20">
           {/* Left Column */}
           <div
-            className="w-full lg:w-1/2 space-y-6 sm:space-y-8 text-left lg:text-left order-1 lg:order-1 lg:mt-0 pl-0 sm:pl-4"
+            className="w-full lg:w-1/2 space-y-7 sm:space-y-8 text-left lg:text-left order-1 lg:order-1 lg:mt-0 pl-0 sm:pl-4"
             data-aos="fade-right"
             data-aos-delay="200"
           >
-            <div className="space-y-4 sm:space-y-6">
+            <div className="space-y-5 mb-7 sm:space-y-6">
               <StatusBadge />
               <MainTitle />
 
