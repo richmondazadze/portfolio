@@ -34,7 +34,7 @@ const SocialLinks = () => {
   const [github] = socialLinks.filter((link) => !link.isPrimary);
 
   return (
-    <div className="w-full bg-gradient-to-br from-white/10 to-white/5 rounded-2xl p-6 py-8 backdrop-blur-xl">
+    <div className="w-full bg-gradient-to-br from-gray-800/50 to-gray-900/50 rounded-2xl p-6 py-8 backdrop-blur-xl">
       <h3 className="text-xl font-semibold text-white mb-6 flex items-center gap-2">
         <span className="inline-block w-8 h-1 bg-indigo-500 rounded-full"></span>
         Connect With Me
@@ -47,7 +47,7 @@ const SocialLinks = () => {
           target="_blank"
           rel="noopener noreferrer"
           className="group relative flex items-center justify-between p-4 rounded-lg 
-                   bg-white/5 border border-white/10 overflow-hidden
+                   bg-gray-800/30 border border-white/10 overflow-hidden
                    hover:border-white/20 transition-all duration-500"
         >
           {/* Hover Gradient Background */}
@@ -108,7 +108,7 @@ const SocialLinks = () => {
             target="_blank"
             rel="noopener noreferrer"
             className="group relative flex items-center gap-3 p-4 rounded-xl 
-                     bg-white/5 border border-white/10 overflow-hidden
+                     bg-gray-800/30 border border-white/10 overflow-hidden
                      hover:border-white/20 transition-all duration-500"
           >
             <div
