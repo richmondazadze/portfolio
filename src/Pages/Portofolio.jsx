@@ -9,10 +9,10 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import CardProject from "../components/CardProject";
-import TechStackIcon from "../components/TechStackIcon";
+import CardProject from "../components/CardProject.jsx";
+import TechStackIcon from "../components/TechStackIcon.jsx";
 import "aos/dist/aos.css";
-import Certificate from "../components/Certificate";
+import Certificate from "../components/Certificate.jsx";
 import { Code, Award, Boxes } from "lucide-react";
 
 // Separate ShowMore/ShowLess button component
@@ -108,16 +108,16 @@ function a11yProps(index) {
 const techStacks = [
   { icon: "html.svg", language: "HTML" },
   { icon: "css.svg", language: "CSS" },
-  { icon: "javascript.svg", language: "JavaScript" },
+  { icon: "nextjs.svg", language: "Next JS" },
   { icon: "tailwind.svg", language: "Tailwind CSS" },
   { icon: "reactjs.svg", language: "ReactJS" },
-  { icon: "vite.svg", language: "Vite" },
   { icon: "nodejs.svg", language: "Node JS" },
   { icon: "bootstrap.svg", language: "Bootstrap" },
   { icon: "firebase.svg", language: "Firebase" },
-  { icon: "MUI.svg", language: "Material UI" },
   { icon: "vercel.svg", language: "Vercel" },
-  { icon: "SweetAlert.svg", language: "SweetAlert2" },
+  { icon: "stripe.svg", language: "Stripe" },
+  { icon: "supabase.svg", language: "Supabase" },
+  { icon: "openai.svg", language: "OpenAI" },
 ];
 
 export default function FullWidthTabs() {

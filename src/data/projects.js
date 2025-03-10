@@ -7,7 +7,7 @@ const projects = [
     Img: "/pennytrack.png",
     Link: "https://pennytrack.tech/",
     githubLink: "https://github.com/richmondazadze/expense-tracker/",
-    TechStack: ["React", "Tailwind CSS", "Material UI"],
+    TechStack: ["React", "Tailwind CSS", "Firebase", "Firebase Auth"],
     Features: [
       "Expense tracking",
       "User-friendly interface",
@@ -24,7 +24,7 @@ const projects = [
     Img: "/summarizer.png", // Make sure to add the screenshot to your public folder
     Link: "https://richmondazadze.github.io/AI-Summarizer/",
     githubLink: "https://github.com/richmondazadze/AI-Summarizer",
-    TechStack: ["React", "OpenAI API", "Tailwind CSS", "Vercel"],
+    TechStack: ["React", "OpenAI API", "Tailwind CSS"],
     Features: [
       "URL-based article summarization",
       "GPT-4 integration",
@@ -41,7 +41,7 @@ const projects = [
     Img: "/richverseecotech.png", // Make sure to add the screenshot to your public folder
     Link: "https://richverseecotech.com/", // Update with the actual link
     githubLink: "https://github.com/richmondazadze/RichverseEcoTech-Website", // Update with the actual GitHub link
-    TechStack: ["React", "Node.js", "Tailwind CSS", "Express", "MongoDB"],
+    TechStack: ["React", "Tailwind CSS", "Formspree API"],
     Features: [
       "Innovative software solutions",
       "Comprehensive digital marketing",
