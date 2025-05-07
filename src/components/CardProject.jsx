@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { ExternalLink, ArrowRight } from "lucide-react";
 
 const CardProject = ({ Img, Title, Description, Link: ProjectLink, id }) => {
+  const [imageError, setImageError] = useState(false);
+
   return (
     <div className="group relative w-full">
       <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-slate-900/90 to-slate-800/90 backdrop-blur-lg border border-white/10 shadow-2xl transition-all duration-300 hover:shadow-purple-500/20">
@@ -10,11 +12,18 @@ const CardProject = ({ Img, Title, Description, Link: ProjectLink, id }) => {
 
         <div className="relative p-5 z-10">
           <div className="relative overflow-hidden rounded-lg">
-            <img
-              src={Img}
-              alt={Title}
-              className="w-full h-48 object-cover transform group-hover:scale-105 transition-transform duration-500"
-            />
+            {imageError ? (
+              <div className="w-full h-48 bg-gray-800 flex items-center justify-center">
+                <span className="text-gray-400">Image failed to load</span>
+              </div>
+            ) : (
+              <img
+                src={Img}
+                alt={Title}
+                className="w-full h-48 object-cover transform group-hover:scale-105 transition-transform duration-500"
+                onError={() => setImageError(true)}
+              />
+            )}
           </div>
 
           <div className="mt-4 space-y-3">

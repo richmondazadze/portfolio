@@ -50,6 +50,24 @@ const projects = [
       "User-friendly interface",
     ],
   },
+  {
+    id: "4",
+    Title: "Sankpost AI",
+    Description: "Sankpost is an AI-powered social media content generator that helps creators, entrepreneurs, and brands instantly generate high-quality content using advanced AI models. Users can create posts aligned with their brand voice and publish faster, saving time while maintaining creativity.",
+    Img: "/sankpost.png", // Make sure to place an image with this name in your /public folder
+    Link: "https://sankpost.me",
+    githubLink: "https://github.com/richmondazadze/sankpost",
+    TechStack: ["Next.js", "Tailwind CSS", "Clerk Auth", "Gemini AI API", "NeonDB", "Vercel"],
+    Features: [
+      "AI-generated captions and content in seconds",
+      "Brand voice customization with tone control",
+      "Secure user authentication with Clerk",
+      "Fast, serverless deployment via Vercel",
+      "Responsive design optimized for mobile and desktop",
+      "Save and copy posts directly to clipboard",
+      "Uses Gemini for content creation"
+    ]
+  },
 ];
 
 export default projects;
