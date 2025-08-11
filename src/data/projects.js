@@ -5,7 +5,7 @@ const projects = [
     Description:
       "A web-based expense tracking application that helps users manage their finances effortlessly. Features an intuitive interface for tracking personal expenses.",
     Img: "/pennytrack.png",
-    Link: "https://pennytrack.tech/",
+    Link: "https://pennytrack.netlify.app/",
     githubLink: "https://github.com/richmondazadze/expense-tracker/",
     TechStack: ["React", "Tailwind CSS", "Firebase", "Firebase Auth"],
     Features: [
