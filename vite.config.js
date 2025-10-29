@@ -11,7 +11,24 @@ export default defineConfig(({ mode }) => ({
     }),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.ico', 'robots.txt', 'apple-touch-icon.png'],
+      includeAssets: [
+        'favicon.ico',
+        'robots.txt',
+        'apple-touch-icon.png',
+        'icon-192x192.png',
+        'icon-512x512.png',
+        '**/*.{js,css,html,svg,png,jpg,jpeg,gif,webp,woff,woff2,ttf,eot,ico}'
+      ],
+      workbox: {
+        globPatterns: ['**/*.{js,css,html,svg,png,jpg,jpeg,gif,webp,woff,woff2,ttf,eot,ico}'],
+        globIgnores: [
+          '**/node_modules/**/*',
+          '**/sw.js',
+          '**/workbox-*.js',
+          '**/workbox-*.js.map',
+          '**/workbox-*.js.LICENSE.txt'
+        ],
+      },
       manifest: {
         name: 'Richmond Azadze - Portfolio',
         short_name: 'Portfolio',

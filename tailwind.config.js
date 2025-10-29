@@ -37,18 +37,14 @@ module.exports = {
       ringWidth: ['hover', 'active'],
     },
   },
-  // Remove unused styles in production
-  purge: {
-    enabled: process.env.NODE_ENV === 'production',
-    content: [
-      './src/**/*.html',
-      './src/**/*.js',
-      './src/**/*.jsx',
-      './src/**/*.ts',
-      './src/**/*.tsx',
-    ],
-    options: {
-      safelist: ['dark'], // Add any classes that should never be purged
-    },
-  },
+  // Content sources for Tailwind to analyze
+  content: [
+    './index.html',
+    './src/**/*.{js,ts,jsx,tsx}',
+  ],
+  safelist: [
+    'dark',
+    // Add any dynamic classes that should never be purged
+    /^bg-/, /^text-/, /^border-/, /^hover:/
+  ],
 }
