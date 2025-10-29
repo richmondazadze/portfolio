@@ -17,12 +17,20 @@ const CardProject = ({ Img, Title, Description, Link: ProjectLink, id }) => {
                 <span className="text-gray-400">Image failed to load</span>
               </div>
             ) : (
-              <img
-                src={Img}
-                alt={Title}
-                className="w-full h-48 object-cover transform group-hover:scale-105 transition-transform duration-500"
-                onError={() => setImageError(true)}
-              />
+              <div className="relative w-full h-48 overflow-hidden">
+                <img
+                  src={Img}
+                  alt={Title}
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                  onError={() => setImageError(true)}
+                  style={{
+                    contentVisibility: 'auto',
+                  }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-br from-transparent to-black/20" aria-hidden="true" />
+              </div>
             )}
           </div>
 
