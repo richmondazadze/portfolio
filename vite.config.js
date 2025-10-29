@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import { VitePWA } from 'vite-plugin-pwa';
-import { visualizer } from 'vite-plugin-bundle-analyzer';
+import { visualizer } from 'rollup-plugin-visualizer';
 
 export default defineConfig(({ mode }) => ({
   plugins: [
@@ -35,6 +35,8 @@ export default defineConfig(({ mode }) => ({
     mode === 'analyze' && visualizer({
       open: true,
       filename: 'bundle-analyzer-report.html',
+      gzipSize: true,
+      brotliSize: true,
     }),
   ].filter(Boolean),
   
