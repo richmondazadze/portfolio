@@ -1,5 +1,21 @@
 const projects = [
   {
+    id: "4",
+    Title: "AtmoWise",
+    Description: "A modern air quality tracking application providing real-time data and AI-powered health insights. Features multi-source air quality data, symptom tracking, and personalized recommendations.",
+    Img: "/atmowise.jpeg",
+    Link: "https://atmowise.vercel.app/",
+    githubLink: "https://github.com/richmondazadze/atmowise",
+    TechStack: ["Next.js", "TypeScript", "Supabase", "Tailwind CSS", "OpenRouter API"],
+    Features: [
+      "Multi-source air quality data",
+      "AI-powered health insights",
+      "Symptom tracking",
+      "Location management",
+      "Dark mode support"
+    ],
+  },
+  {
     id: "1",
     Title: "PennyTrack",
     Description:
