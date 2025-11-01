@@ -234,7 +234,13 @@ const AboutPage = () => {
             </p>
 
             <div className="flex flex-col lg:flex-row items-center lg:items-start gap-4 lg:gap-4 lg:px-0 w-full">
-              <a href="https://richmondazadze.me/resume.pdf" target="_blank" className="w-full lg:w-auto" download>
+              <a 
+                href="https://richmondazadze.me/resume.pdf" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="w-full lg:w-auto" 
+                download="Richmond_Azadze_Resume.pdf"
+              >
                 <button
                   data-aos="fade-up"
                   data-aos-duration="800"

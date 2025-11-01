@@ -17,40 +17,58 @@ const AnimatePresence = lazy(() =>
   import('framer-motion').then(module => ({ default: module.AnimatePresence }))
 );
 
-// Loading component
-const LoadingSpinner = () => (
-  <div className="flex items-center justify-center min-h-screen">
-    <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-purple-500"></div>
-  </div>
-);
+// Loading component with better layout stability
+const LoadingSpinner = ({ fullScreen = true }) => {
+  const spinner = (
+    <div className="flex items-center justify-center">
+      <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-purple-500"></div>
+      <span className="sr-only">Loading...</span>
+    </div>
+  );
+
+  return fullScreen ? (
+    <div className="fixed inset-0 flex items-center justify-center bg-gray-900/50 backdrop-blur-sm z-50">
+      {spinner}
+    </div>
+  ) : spinner;
+};
 
 const LandingPage = ({ showWelcome, setShowWelcome }) => {
   return (
-    <Suspense fallback={<LoadingSpinner />}>
+    <Suspense fallback={<LoadingSpinner fullScreen={true} />}>
       <AnimatePresence mode="wait">
-        {showWelcome && (
-          <Suspense fallback={<LoadingSpinner />}>
-            <WelcomeScreen onLoadingComplete={() => setShowWelcome(false)} />
-          </Suspense>
+        {showWelcome ? (
+          <WelcomeScreen onLoadingComplete={() => setShowWelcome(false)} />
+        ) : (
+          <>
+            <Navbar />
+            <AnimatedBackground />
+            <main>
+              <Suspense fallback={<LoadingSpinner fullScreen={false} />}>
+                <Home />
+                <About />
+                <Portofolio />
+                <ContactPage />
+              </Suspense>
+            </main>
+            <footer>
+              <center>
+                <hr className="my-3 border-gray-400 opacity-15 sm:mx-auto lg:my-6 text-center" />
+                <span className="block text-sm pb-4 text-gray-500 text-center dark:text-gray-400">
+                  &copy; {new Date().getFullYear()}{" "}
+                  <a
+                    href="https://github.com/richmondazadze"
+                    className="hover:underline"
+                  >
+                    <strong>richmondazadze</strong>
+                  </a>
+                  . All Rights Reserved.
+                </span>
+              </center>
+            </footer>
+          </>
         )}
       </AnimatePresence>
-
-      {!showWelcome && (
-        <Suspense fallback={<LoadingSpinner />}>
-          <Navbar />
-          <AnimatedBackground />
-          <Suspense fallback={<div className="min-h-screen"></div>}>
-            <Home />
-            <About />
-            <Portofolio />
-            <ContactPage />
-          </Suspense>
-          <footer>
-            <center>
-              <hr className="my-3 border-gray-400 opacity-15 sm:mx-auto lg:my-6 text-center" />
-              <span className="block text-sm pb-4 text-gray-500 text-center dark:text-gray-400">
-                © {new Date().getFullYear()}{" "}
-                <a
                   href="https://github.com/richmondazadze"
                   className="hover:underline"
                 >
