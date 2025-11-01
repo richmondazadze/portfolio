@@ -59,6 +59,8 @@ const LandingPage = ({ showWelcome, setShowWelcome }) => {
                   <a
                     href="https://github.com/richmondazadze"
                     className="hover:underline"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
                     <strong>richmondazadze</strong>
                   </a>
@@ -69,17 +71,6 @@ const LandingPage = ({ showWelcome, setShowWelcome }) => {
           </>
         )}
       </AnimatePresence>
-                  href="https://github.com/richmondazadze"
-                  className="hover:underline"
-                >
-                  <strong>richmondazadze</strong>
-                </a>
-                . All Rights Reserved.
-              </span>
-            </center>
-          </footer>
-        </Suspense>
-      )}
     </Suspense>
   );
 };
