@@ -238,8 +238,7 @@ const AboutPage = () => {
                 href="/resume.pdf" 
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full lg:w-auto" 
-                download="Richmond_Azadze_Resume.pdf"
+                className="w-full lg:w-auto"
               >
                 <button
                   data-aos="fade-up"
