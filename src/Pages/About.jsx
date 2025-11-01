@@ -235,8 +235,8 @@ const AboutPage = () => {
 
             <div className="flex flex-col lg:flex-row items-center lg:items-start gap-4 lg:gap-4 lg:px-0 w-full">
               <a 
-                href="https://richmondazadze.me/resume.pdf" 
-                target="_blank" 
+                href="/resume.pdf" 
+                target="_blank"
                 rel="noopener noreferrer"
                 className="w-full lg:w-auto" 
                 download="Richmond_Azadze_Resume.pdf"

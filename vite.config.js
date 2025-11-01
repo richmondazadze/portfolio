@@ -17,10 +17,11 @@ export default defineConfig(({ mode }) => ({
         'apple-touch-icon.png',
         'icon-192x192.png',
         'icon-512x512.png',
+        'resume.pdf',
         '**/*.{js,css,html,svg,png,jpg,jpeg,gif,webp,woff,woff2,ttf,eot,ico}'
       ],
       workbox: {
-        globPatterns: ['**/*.{js,css,html,svg,png,jpg,jpeg,gif,webp,woff,woff2,ttf,eot,ico}'],
+        globPatterns: ['**/*.{js,css,html,svg,png,jpg,jpeg,gif,webp,woff,woff2,ttf,eot,ico,pdf}'],
         globIgnores: [
           '**/node_modules/**/*',
           '**/sw.js',
@@ -28,6 +29,22 @@ export default defineConfig(({ mode }) => ({
           '**/workbox-*.js.map',
           '**/workbox-*.js.LICENSE.txt'
         ],
+        runtimeCaching: [
+          {
+            urlPattern: /^https:\/\/richmondazadze\.me\/.*\.(?:png|jpg|jpeg|svg|gif|webp|ico|pdf)$/i,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'external-images',
+              expiration: {
+                maxEntries: 100,
+                maxAgeSeconds: 60 * 60 * 24 * 30 // 30 days
+              },
+              cacheableResponse: {
+                statuses: [0, 200]
+              }
+            }
+          }
+        ]
       },
       manifest: {
         name: 'Richmond Azadze - Portfolio',
@@ -35,18 +52,22 @@ export default defineConfig(({ mode }) => ({
         theme_color: '#1a1a1a',
         background_color: '#0f172a',
         display: 'standalone',
+        start_url: '/',
+        scope: '/',
         icons: [
           {
             src: '/icon-192x192.png',
             sizes: '192x192',
             type: 'image/png',
+            purpose: 'any maskable'
           },
           {
             src: '/icon-512x512.png',
             sizes: '512x512',
             type: 'image/png',
-          },
-        ],
+            purpose: 'any maskable'
+          }
+        ]
       },
     }),
     mode === 'analyze' && visualizer({
