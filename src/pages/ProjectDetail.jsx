@@ -1,6 +1,8 @@
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, ArrowUpRight, Github } from 'lucide-react';
+import { motion } from 'framer-motion';
 import Reveal from '../components/Reveal';
+import { EASE, inView } from '../lib/motion';
 import { getProject } from '../data/projects';
 
 export default function ProjectDetail() {
@@ -85,9 +87,13 @@ export default function ProjectDetail() {
       {/* Cover image */}
       <section className="px-8 md:px-12">
         <Reveal className="mx-auto aspect-[16/9] max-w-[1600px] overflow-hidden bg-charcoal">
-          <img
+          <motion.img
             src={project.image}
             alt={project.title}
+            initial={{ scale: 1.12, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            viewport={inView}
+            transition={{ duration: 1.3, ease: EASE }}
             className="h-full w-full object-contain"
           />
         </Reveal>

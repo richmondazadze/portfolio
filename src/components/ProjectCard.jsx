@@ -1,12 +1,21 @@
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { EASE } from '../lib/motion';
+
+const MotionLink = motion(Link);
 
 /**
- * Portfolio card with hover-reveal viewport: image scales 1.1x and a navy/60
- * overlay fades in with a white circular 'VIEW' badge.
+ * Portfolio card with a hover lift + hover-reveal viewport: image scales and a
+ * navy/60 overlay fades in with a white circular 'VIEW' badge.
  */
 export default function ProjectCard({ project }) {
   return (
-    <Link to={`/work/${project.slug}`} className="group block">
+    <MotionLink
+      to={`/work/${project.slug}`}
+      className="group block"
+      whileHover={{ y: -8 }}
+      transition={{ duration: 0.5, ease: EASE }}
+    >
       <div className="relative aspect-[16/10] overflow-hidden bg-charcoal">
         <img
           src={project.image}
@@ -31,6 +40,6 @@ export default function ProjectCard({ project }) {
           {project.category}
         </span>
       </div>
-    </Link>
+    </MotionLink>
   );
 }

@@ -1,7 +1,20 @@
 import { useEffect, useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { site } from '../data/site';
+import { EASE } from '../lib/motion';
+
+const menuVariants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
+  exit: { transition: { staggerChildren: 0.04, staggerDirection: -1 } },
+};
+const menuItem = {
+  hidden: { opacity: 0, y: 30 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE } },
+  exit: { opacity: 0, y: 20, transition: { duration: 0.3, ease: EASE } },
+};
 
 const LINKS = [
   { label: 'Work', to: '/work' },
@@ -80,27 +93,46 @@ export default function Navigation() {
       </nav>
 
       {/* Mobile overlay */}
-      {open && (
-        <div className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-10 bg-navy md:hidden">
-          {LINKS.map((link) => (
-            <NavLink
-              key={link.label}
-              to={link.to}
-              onClick={() => setOpen(false)}
-              className="font-display text-5xl uppercase tracking-tight text-white"
-            >
-              {link.label}
-            </NavLink>
-          ))}
-          <Link
-            to="/contact"
-            onClick={() => setOpen(false)}
-            className="mt-4 border border-white px-8 py-4 text-xs uppercase tracking-widest-xl text-white"
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.35, ease: EASE }}
+            className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-10 bg-navy md:hidden"
           >
-            Get in Touch
-          </Link>
-        </div>
-      )}
+            <motion.div
+              variants={menuVariants}
+              initial="hidden"
+              animate="show"
+              exit="exit"
+              className="flex flex-col items-center gap-10"
+            >
+              {LINKS.map((link) => (
+                <motion.div key={link.label} variants={menuItem}>
+                  <NavLink
+                    to={link.to}
+                    onClick={() => setOpen(false)}
+                    className="font-display text-5xl uppercase tracking-tight text-white"
+                  >
+                    {link.label}
+                  </NavLink>
+                </motion.div>
+              ))}
+              <motion.div variants={menuItem}>
+                <Link
+                  to="/contact"
+                  onClick={() => setOpen(false)}
+                  className="mt-4 border border-white px-8 py-4 text-xs uppercase tracking-widest-xl text-white"
+                >
+                  Get in Touch
+                </Link>
+              </motion.div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 import Reveal from './Reveal';
+import { EASE, inView } from '../lib/motion';
 import { featuredProjects } from '../data/projects';
 
 /**
@@ -21,11 +23,15 @@ export default function Featured() {
             to={`/work/${project.slug}`}
             className="relative block aspect-[16/10] overflow-hidden bg-charcoal"
           >
-            <img
+            <motion.img
               src={project.image}
               alt={project.title}
               loading="lazy"
-              className="h-full w-full object-contain grayscale transition-all duration-700 ease-fluid hover:grayscale-0"
+              initial={{ scale: 1.12, opacity: 0 }}
+              whileInView={{ scale: 1, opacity: 1 }}
+              viewport={inView}
+              transition={{ duration: 1.2, ease: EASE }}
+              className="h-full w-full object-contain grayscale transition-[filter] duration-700 ease-fluid hover:grayscale-0"
             />
           </Link>
         </Reveal>

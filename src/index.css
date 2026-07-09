@@ -33,18 +33,12 @@
   .tracking-widest-xl {
     letter-spacing: 0.35em;
   }
+}
 
-  /* Scroll reveal */
-  .reveal {
-    opacity: 0;
-    transform: translateY(10px);
-    transition:
-      opacity 1000ms cubic-bezier(0.16, 1, 0.3, 1),
-      transform 1000ms cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .reveal.is-visible {
-    opacity: 1;
-    transform: translateY(0);
+/* Honor reduced-motion: neutralize smooth scrolling; framer-motion's
+   own animations are disabled via <MotionConfig reducedMotion="user">. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
 }
