@@ -1,87 +1,59 @@
-# Portfolio of Richmond Azadze
+# Richmond Azadze — Portfolio (Redesign)
 
-Hello everyone!  
-I’m Richmond Azadze, a passionate Front-End Developer. In this portfolio, I showcase my skills and projects that highlight my journey in web development.
+A high-end, editorial multi-page portfolio for a Software & AI Engineer. Dark
+navy base, massive Anton display typography, asymmetric layouts, and fluid
+motion. Content migrated from the previous portfolio.
 
-**Tech Stack Used:**
+## Stack
 
-- ReactJS
-- Tailwind CSS
-- AOS (Animate On Scroll)
-- Framer Motion
-- Lucide
-- Material UI
-- SweetAlert2
+- React 19 + Vite
+- react-router-dom (multi-page routing)
+- Tailwind CSS 3
+- lucide-react (icons)
+- Fonts: Anton (display) + Plus Jakarta Sans (body), from Google Fonts
 
-**Website Link:**  
-[https://www.richmondazadze.me/](https://www.richmondazadze.me/)
+## Pages / routes
 
-I appreciate your interest in my work. If you decide to use any of my projects, please include credit. Thank you! 🙏
+| Route         | Page          | Contents                                            |
+| ------------- | ------------- | --------------------------------------------------- |
+| `/`           | Home          | Hero, intro + stats, featured work, spotlight, capabilities |
+| `/work`       | Work          | Full masonry grid of all projects                   |
+| `/work/:slug` | Project detail| Overview, cover, tech stack, key features, links    |
+| `/about`      | About         | Bio, stats, profile, tech-stack grid, approach      |
+| `/contact`    | Contact       | Editorial contact form (FormSubmit) + direct links  |
+| `*`           | 404           | Not found                                            |
 
----
+## Content
 
-# Tutorial: Running the Project
+- Identity, bio, roles, socials, resume, email: `src/data/site.js`
+- Projects (with slugs, tech, features, links): `src/data/projects.js`
+- Assets (images, resume, tech logos): `public/` and `public/tech/`
 
-Here’s a simple guide to run this project.
+The contact form posts to FormSubmit (`https://formsubmit.co/ajax/<email>`).
+The first submission requires a one-time email activation from FormSubmit.
 
-## Prerequisites
+## Design system
 
-Ensure that you have already installed:
+| Token    | Value     | Usage                          |
+| -------- | --------- | ------------------------------ |
+| navy     | `#171e19` | Base background, dark sections |
+| sage     | `#b7c6c2` | Accent text, outline stroke    |
+| taupe    | `#9f8d8b` | Secondary body text            |
+| beige    | `#d7c5b2` | Accent                         |
+| cyan     | `#d5f4f9` | Decorative offset square       |
+| softblue | `#bbe2f5` | Ambient orb                    |
+| charcoal | `#302b2f` | Approach section               |
 
-- **Node.js**
+- **Headings:** `font-display` (Anton), uppercase, `tracking-tighter`, up to `16vw`.
+- **Body:** `font-sans` (Plus Jakarta Sans), weights 300/400/600.
+- **Motion:** `ease-fluid` = `cubic-bezier(0.16, 1, 0.3, 1)`.
+- **Utilities:** `.text-outline` (sage stroke), `.reveal` (scroll reveal).
 
----
+## Run
 
-## Steps to Run the Project
-
-1. **Download this project:**
-
-   ```bash
-   git clone https://github.com/richmondazadze/Portfolio.git
-   ```
-
-2. **Install all dependencies:**
-
-   ```bash
-   npm install
-   ```
-
-   Or use:
-
-   ```bash
-   npm install --legacy-peer-deps
-   ```
-
-3. **Run the project:**
-
-   ```bash
-   npm run dev
-   ```
-
-4. **Open in browser:**
-
-   Access the application through the link displayed in your terminal.
-
----
-
-## Creating a Production Build
-
-To create a production-ready build:
-
-1. Run the build command:
-
-   ```bash
-   npm run build
-   ```
-
-2. The build files will be saved in the `dist` folder. You can upload this folder to your hosting server.
-
----
-
-## Notes
-
-If you encounter issues while running the project, ensure that:
-
-- Node.js is correctly installed.
-- You’re in the correct project directory.
-- All dependencies are installed without errors.
+```bash
+npm install
+npm run dev      # http://localhost:5174
+npm run build
+npm run preview
+```

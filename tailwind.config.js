@@ -1,50 +1,43 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+export default {
+  content: ['./index.html', './src/**/*.{js,jsx}'],
   theme: {
     extend: {
-      animation: {
-        'gradient': 'gradient 8s linear infinite',
-      },
-      keyframes: {
-        gradient: {
-          '0%, 100%': { 'background-size': '200% 200%', 'background-position': 'left center' },
-          '50%': { 'background-size': '200% 200%', 'background-position': 'right center' },
-        },
+      colors: {
+        navy: '#171e19',
+        sage: '#b7c6c2',
+        taupe: '#9f8d8b',
+        beige: '#d7c5b2',
+        cyan: '#d5f4f9',
+        softblue: '#bbe2f5',
+        charcoal: '#302b2f',
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
+        display: ['Anton', 'sans-serif'],
+        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
       },
-      backdropBlur: {
-        sm: '4px',
+      fontSize: {
+        hero: '18vw',
+      },
+      transitionTimingFunction: {
+        fluid: 'cubic-bezier(0.16, 1, 0.3, 1)',
+      },
+      keyframes: {
+        float: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-20px)' },
+        },
+        bounceArrow: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(6px)' },
+        },
+      },
+      animation: {
+        float: 'float 6s ease-in-out infinite',
+        'float-slow': 'float 9s ease-in-out infinite',
+        bounceArrow: 'bounceArrow 1.6s ease-in-out infinite',
       },
     },
   },
-  plugins: [
-    require('@tailwindcss/typography'),
-    require('@tailwindcss/forms'),
-  ],
-  // Only include the variants you use to reduce CSS size
-  variants: {
-    extend: {
-      opacity: ['disabled'],
-      backgroundColor: ['active', 'hover', 'focus'],
-      textColor: ['active', 'hover', 'focus'],
-      borderColor: ['active', 'hover', 'focus'],
-      ringWidth: ['hover', 'active'],
-    },
-  },
-  // Content sources for Tailwind to analyze
-  content: [
-    './index.html',
-    './src/**/*.{js,ts,jsx,tsx}',
-  ],
-  safelist: [
-    'dark',
-    // Add any dynamic classes that should never be purged
-    /^bg-/, /^text-/, /^border-/, /^hover:/
-  ],
-}
+  plugins: [],
+};
