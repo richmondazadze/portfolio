@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import AmbientOrbs from './AmbientOrbs';
 import { site } from '../data/site';
 import { container, fadeUp, lineReveal } from '../lib/motion';
+import { useIsMobile } from '../lib/useIsMobile';
 
 const MotionLink = motion(Link);
 
@@ -15,12 +16,15 @@ const MotionLink = motion(Link);
  */
 export default function Hero() {
   const ref = useRef(null);
+  const isMobile = useIsMobile();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start start', 'end start'],
   });
   const contentY = useTransform(scrollYProgress, [0, 1], [0, -80]);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.75], [1, 0]);
+  // Skip scroll-driven parallax on phones — the entrance animation still runs.
+  const parallaxStyle = isMobile ? undefined : { y: contentY, opacity: contentOpacity };
 
   return (
     <section
@@ -30,7 +34,7 @@ export default function Hero() {
       <AmbientOrbs />
 
       <motion.div
-        style={{ y: contentY, opacity: contentOpacity }}
+        style={parallaxStyle}
         variants={container(0.13, 0.15)}
         initial="hidden"
         animate="show"

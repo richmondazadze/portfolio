@@ -53,8 +53,10 @@ export default function Navigation() {
       >
         <Link to="/" aria-label={`${site.name} — home`} className="inline-flex items-center">
           <img
-            src="/ra-logo.png"
+            src="/ra-logo.webp"
             alt={site.name}
+            width="64"
+            height="54"
             className="h-7 w-auto md:h-8"
           />
         </Link>
