@@ -158,7 +158,7 @@
   .contact-success-icon svg path { stroke-dasharray: 32; animation: contact-check .5s ease-out .2s backwards; }
   .contact-error { animation: menu-link .3s ease-out both; }
 }
-@media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+@media (min-width: 768px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
   .contact-ambient::before { animation: contact-light 10s ease-in-out 3 alternate; }
 }
 @keyframes contact-title { from { transform: translateY(105%) rotate(2deg); } to { transform: none; } }
@@ -167,3 +167,26 @@
 @keyframes contact-confirm { from { opacity: 0; transform: scale(.7) rotate(-12deg); } to { opacity: 1; transform: none; } }
 @keyframes contact-check { from { stroke-dashoffset: 32; } to { stroke-dashoffset: 0; } }
 @keyframes contact-light { from { transform: translate(0, 0); } to { transform: translate(12%, 8%); } }
+
+/* Touch motion settles quickly and never moves a field under the keyboard. */
+@media (max-width: 767px), (hover: none), (pointer: coarse) {
+  .form-field:focus-within, .contact-form .form-field:focus-within .form-label,
+  .contact-direct .text-link:hover { transform: none; }
+  .contact-form:focus-within { box-shadow: none; }
+  .contact-form:focus-within, .contact-form:focus-within .form-field,
+  .contact-form:focus-within .contact-submit { animation: none; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  @media (max-width: 767px), (hover: none), (pointer: coarse) {
+    .route-enter { animation-duration: .18s; }
+    #mobile-menu { animation-name: route-arrive; animation-duration: .18s; }
+    #mobile-menu > a { animation-duration: .25s; animation-delay: 0s; }
+    .contact-intro > .eyebrow, .contact-intro .page-description { animation-duration: .3s; animation-delay: 0s; }
+    .contact-title-mask > span { animation-name: contact-title-mobile; animation-duration: .45s; animation-delay: .04s; }
+    .contact-form { animation-name: route-arrive; animation-duration: .25s; animation-delay: 0s; }
+    .contact-form .form-field, .contact-submit, .contact-form::before { animation: none; }
+    .scroll-cue svg { animation-iteration-count: 1; }
+    .image-dialog[open] { animation-name: route-arrive; animation-duration: .18s; }
+  }
+}
+@keyframes contact-title-mobile { from { transform: translateY(40%); opacity: .75; } to { transform: none; opacity: 1; } }

@@ -46,11 +46,11 @@ export default function About() {
       <section className="px-6 pb-16 md:px-12 md:pb-24">
         <div className="mx-auto grid max-w-[1344px] grid-cols-1 items-start gap-16 lg:grid-cols-2 lg:gap-24">
           <Reveal className="relative order-2 lg:order-1">
-            <div className="absolute -left-6 -top-6 h-full w-full bg-cyan/20 md:-left-10 md:-top-10" />
+            <div className="absolute -left-6 -top-6 h-full w-full rounded-md bg-cyan/20 md:-left-10 md:-top-10" />
             <img
               src={site.profileImage}
               alt={site.name}
-              className="relative aspect-[4/5] w-full object-cover "
+              className="relative aspect-[4/5] w-full rounded-md object-cover"
             />
           </Reveal>
 

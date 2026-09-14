@@ -1,3 +1,4 @@
+import { useIsMobile } from '../lib/useIsMobile';
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
@@ -10,18 +11,19 @@ import { useFineMotion } from '../lib/useFineMotion';
 export default function Hero() {
   const section = useRef(null);
   const reduced = useReducedMotion();
+  const lightMotion = useIsMobile('(max-width: 767px), (hover: none), (pointer: coarse)');
   const fine = useFineMotion();
   const { scrollYProgress } = useScroll({ target: section, offset: ['start start', 'end start'] });
   const drift = useTransform(scrollYProgress, [0, 1], [0, -28]);
   const reveal = (delay = 0) => ({
-    initial: reduced ? false : { opacity: 0, y: 12 },
+    initial: reduced ? false : { opacity: lightMotion ? 0.75 : 0, y: lightMotion ? 6 : 12 },
     animate: { opacity: 1, y: 0 },
-    transition: { duration: reduced ? 0 : 0.55, delay: reduced ? 0 : delay, ease: EASE },
+    transition: { duration: reduced ? 0 : lightMotion ? 0.32 : 0.55, delay: reduced ? 0 : lightMotion ? delay * 0.5 : delay, ease: EASE },
   });
   const line = delay => ({
-    initial: reduced ? false : { y: '105%', rotate: 2 },
+    initial: reduced ? false : { y: lightMotion ? '45%' : '105%', rotate: lightMotion ? 0 : 2 },
     animate: { y: '0%', rotate: 0 },
-    transition: { duration: reduced ? 0 : 0.85, delay: reduced ? 0 : delay, ease: EASE },
+    transition: { duration: reduced ? 0 : lightMotion ? 0.5 : 0.85, delay: reduced ? 0 : lightMotion ? delay * 0.5 : delay, ease: EASE },
   });
   return (
     <section ref={section} className="hero-motion relative overflow-hidden bg-navy pb-12 pt-36 sm:pt-40 lg:pb-16 lg:pt-44">
