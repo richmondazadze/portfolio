@@ -5,7 +5,7 @@ export const site = {
   roles: ['Software Engineer', 'Full Stack Developer', 'AI Engineer'],
   email: 'richmondazadze1313@gmail.com',
   resume: '/resume.pdf',
-  profileImage: '/profile.webp',
+  profileImage: '/profile.jpeg',
   experienceStart: '2021-11-06',
   tagline: 'I build full-stack applications and thoughtful AI tools that make everyday tasks simpler.',
   bio: 'I’m a software engineer with a background in Computer Science. I build full-stack applications and integrate AI into practical tools, from air-quality insights and content generation to personal finance.',
