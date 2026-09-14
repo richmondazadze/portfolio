@@ -1,9 +1,10 @@
 import { Suspense, lazy, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
 import Home from './pages/Home';
+import ScrollProgress from './components/ScrollProgress';
 
 const Work = lazy(() => import('./pages/Work'));
 const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
@@ -12,6 +13,7 @@ const Contact = lazy(() => import('./pages/Contact'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 export default function App() {
+  const { pathname } = useLocation();
   useEffect(() => {
     const prefetch = () => Promise.all([import('./pages/Work'), import('./pages/About'), import('./pages/Contact'), import('./pages/ProjectDetail')]).catch(() => {});
     if (window.requestIdleCallback) {
@@ -26,8 +28,10 @@ export default function App() {
       <a href="#main-content" className="skip-link">Skip to content</a>
       <ScrollToTop />
       <Navigation />
+      <ScrollProgress key={pathname} />
       <main id="main-content" tabIndex={-1} className="focus:outline-none">
         <Suspense fallback={<div className="site-container min-h-screen pt-40" role="status">Loading page…</div>}>
+          <div key={pathname} className="route-enter">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/work" element={<Work />} />
@@ -36,6 +40,7 @@ export default function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
+          </div>
         </Suspense>
       </main>
       <Footer />

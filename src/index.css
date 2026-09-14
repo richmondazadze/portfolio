@@ -76,3 +76,94 @@
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
+
+/* Motion layers use transforms and opacity; the document keeps native scrolling. */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 60;
+  height: 2px;
+  background: #7ba68e;
+  transform-origin: left;
+  pointer-events: none;
+}
+.hero-line { display: block; overflow: hidden; padding-bottom: .08em; margin-bottom: -.08em; }
+.preview-sheen { position: absolute; inset: 0; pointer-events: none; opacity: 0; background: linear-gradient(115deg, transparent 20%, rgb(255 255 255 / .2) 45%, transparent 70%); transform: translateX(-70%); }
+@media (prefers-reduced-motion: no-preference) {
+  .route-enter { animation: route-arrive .3s ease-out both; }
+  #mobile-menu { animation: menu-arrive .25s cubic-bezier(.16,1,.3,1) both; }
+  #mobile-menu > a { animation: menu-link .4s cubic-bezier(.16,1,.3,1) both; }
+  #mobile-menu > a:nth-child(2) { animation-delay: .045s; }
+  #mobile-menu > a:nth-child(3) { animation-delay: .09s; }
+  .image-dialog[open] { animation: dialog-arrive .25s cubic-bezier(.16,1,.3,1) both; }
+  .image-dialog[open]::backdrop { animation: route-arrive .2s ease-out both; }
+  .contact-success { animation: menu-link .45s cubic-bezier(.16,1,.3,1) both; }
+  .scroll-cue svg { animation: scroll-invitation 1.8s ease-in-out 1s 3; }
+  .form-field { transition: transform .2s ease; }
+  .form-field:focus-within { transform: translateY(-2px); }
+  .form-control { transition: border-color .2s ease, background-color .2s ease, box-shadow .2s ease; }
+  .form-control:focus { background-color: rgb(255 255 255 / .075); box-shadow: 0 0 0 3px rgb(183 198 194 / .08); }
+  .button-primary, .button-secondary { transition: transform .22s cubic-bezier(.16,1,.3,1), background-color .2s, border-color .2s, box-shadow .2s; }
+  .button-primary svg, .button-secondary svg, .text-link svg, .project-arrow svg { transition: transform .25s cubic-bezier(.16,1,.3,1); }
+  .button-primary:active, .button-secondary:active { transform: scale(.98); }
+  .text-link { text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 6px; transition: text-decoration-color .2s; }
+  .text-link:hover, .text-link:focus-visible { text-decoration-color: currentColor; }
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .button-primary:hover, .button-secondary:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgb(0 0 0 / .1); }
+  .button-primary:hover svg, .button-secondary:hover svg, .text-link:hover svg { transform: translate(2px, -2px); }
+  .project-card:hover .preview-sheen { opacity: 1; transform: translateX(70%); transition: transform .8s cubic-bezier(.16,1,.3,1), opacity .3s; }
+  .project-card:hover .project-arrow svg { transform: rotate(45deg); }
+  .project-card .preview-image img { transition: transform .55s cubic-bezier(.16,1,.3,1); }
+  .project-card:hover .preview-image img { transform: translateY(-4px) scale(1.015); }
+}
+@keyframes route-arrive { from { opacity: .72; } to { opacity: 1; } }
+@keyframes menu-arrive { from { opacity: .8; transform: translateY(-12px); } to { opacity: 1; transform: none; } }
+@keyframes menu-link { from { opacity: .5; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+@keyframes dialog-arrive { from { opacity: 0; transform: translateY(12px) scale(.98); } to { opacity: 1; transform: none; } }
+@keyframes scroll-invitation { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .project-card:hover .preview-image img { transform: none; }
+}
+
+/* Contact choreography: motion surrounds the form without moving the typing surface. */
+.contact-ambient { position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.contact-ambient::before { content: ''; position: absolute; width: min(70vw, 800px); aspect-ratio: 1; top: 0; left: -20%; background: radial-gradient(ellipse, rgb(183 198 194 / .1), transparent 65%); }
+.contact-title-mask { display: block; overflow: hidden; padding-bottom: .1em; margin-bottom: -.1em; }
+.contact-title-mask > span { display: block; }
+.contact-form { position: relative; }
+.contact-form::before { content: ''; position: absolute; top: -1px; left: 8%; right: 8%; height: 1px; background: linear-gradient(90deg, transparent, #b7c6c2, transparent); opacity: .25; transform-origin: left; pointer-events: none; }
+.contact-form .form-label { display: inline-block; }
+.contact-success-icon { display: inline-flex; padding: 16px; border-radius: 50%; background: rgb(183 198 194 / .1); border: 1px solid rgb(183 198 194 / .25); }
+@media (prefers-reduced-motion: no-preference) {
+  .contact-intro > .eyebrow { animation: menu-link .5s cubic-bezier(.16,1,.3,1) both; }
+  .contact-title-mask > span { animation: contact-title .8s cubic-bezier(.16,1,.3,1) .08s both; }
+  .contact-intro .page-description { animation: menu-link .55s cubic-bezier(.16,1,.3,1) .18s both; }
+  .contact-form { animation: contact-form-arrive .6s cubic-bezier(.16,1,.3,1) .12s backwards; transition: border-color .25s, box-shadow .3s; }
+  .contact-form::before { animation: contact-rule .85s cubic-bezier(.16,1,.3,1) .3s backwards; transition: opacity .3s; }
+  .contact-form:focus-within { border-color: rgb(183 198 194 / .5); box-shadow: 0 16px 60px rgb(0 0 0 / .12); }
+  .contact-form:focus-within::before { opacity: 1; }
+  .contact-form .form-field { animation: menu-link .45s cubic-bezier(.16,1,.3,1) .2s backwards; }
+  .contact-form .form-field:nth-of-type(2) { animation-delay: .26s; }
+  .contact-form .form-field:nth-of-type(3) { animation-delay: .32s; }
+  .contact-form .form-label { transition: color .2s, transform .25s; }
+  .contact-form .form-field:focus-within .form-label { color: #b7c6c2; transform: translateX(3px); }
+  .contact-submit { animation: menu-link .5s cubic-bezier(.16,1,.3,1) .38s backwards; }
+  .contact-direct .text-link { transition: transform .25s, text-decoration-color .2s; }
+  .contact-direct .text-link:hover { transform: translateY(-3px); }
+  .contact-success-icon { animation: contact-confirm .55s cubic-bezier(.16,1,.3,1) both; }
+  .contact-success-icon svg path { stroke-dasharray: 32; animation: contact-check .5s ease-out .2s backwards; }
+  .contact-error { animation: menu-link .3s ease-out both; }
+}
+@media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+  .contact-ambient::before { animation: contact-light 10s ease-in-out 3 alternate; }
+}
+@keyframes contact-title { from { transform: translateY(105%) rotate(2deg); } to { transform: none; } }
+@keyframes contact-form-arrive { from { opacity: .55; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+@keyframes contact-rule { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes contact-confirm { from { opacity: 0; transform: scale(.7) rotate(-12deg); } to { opacity: 1; transform: none; } }
+@keyframes contact-check { from { stroke-dashoffset: 32; } to { stroke-dashoffset: 0; } }
+@keyframes contact-light { from { transform: translate(0, 0); } to { transform: translate(12%, 8%); } }

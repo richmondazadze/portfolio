@@ -6,6 +6,18 @@ export default function Reveal({ as = 'div', className = '', style, delay = 0, c
   const reduced = useReducedMotion();
   const Tag = tags[as] || (tags[as] = motion.create(as));
   const { transitionDelay, ...restStyle } = style || {};
-  const stagger = Math.min(transitionDelay ? parseFloat(transitionDelay) / 1000 : delay, 0.08);
-  return <Tag className={className} style={restStyle} initial={reduced ? false : { opacity: 0.85, y: 8 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '0px' }} transition={{ duration: reduced ? 0 : 0.3, ease: EASE, delay: reduced ? 0 : stagger }} {...props}>{children}</Tag>;
+  const cssDelay = transitionDelay ? parseFloat(transitionDelay) / (transitionDelay.endsWith('ms') ? 1000 : 1) : delay;
+  const stagger = Math.min(Math.max(cssDelay || 0, 0), 0.16);
+  return (
+    <Tag
+      className={className}
+      style={restStyle}
+      initial={reduced ? false : { opacity: 0.65, y: 20 }}
+      animate={reduced ? { opacity: 1, y: 0 } : undefined}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '0px 0px 64px 0px' }}
+      transition={{ duration: reduced ? 0 : 0.55, ease: EASE, delay: reduced ? 0 : stagger }}
+      {...props}
+    >{children}</Tag>
+  );
 }

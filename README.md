@@ -64,7 +64,7 @@ npm test         # contact response handling, mocked locally
 - Responsive project cards retain the complete screenshot; detail pages provide a native modal with original-size zoom.
 - Mobile navigation locks background scrolling, contains keyboard focus, closes on navigation/Escape, and restores focus on dismissal.
 - Forms use associated labels, native validation, sending/error/success states, and confirmed response handling.
-- Reduced-motion preferences disable decorative movement; page navigation resets scroll immediately.
+- Reduced-motion preferences disable decorative movement; page navigation resets scroll immediately. Hero lines, scroll reveals, menu entrances, and dialogs share a coordinated motion system. Pointer tilt and subtle hero parallax are limited to large screens with fine pointers; scrolling stays native.
 - Shared design styles live in `src/index.css`. Light surfaces use their own secondary text color.
 
 See `UI-REVIEW.md` for the original audit and implementation status.
