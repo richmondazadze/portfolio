@@ -7,9 +7,8 @@ export const site = {
   resume: '/resume.pdf',
   profileImage: '/profile.webp',
   experienceStart: '2021-11-06',
-  tagline:
-    'Passionate about crafting innovative digital solutions through clean code and cutting-edge technologies. Specializing in full-stack development and AI integration.',
-  bio: 'A passionate Software Engineer and AI enthusiast with a strong foundation in Computer Science. I specialize in developing innovative solutions using modern technologies, with a particular focus on AI integration and full-stack development — building impactful projects that bridge technology and real-world applications.',
+  tagline: 'I build full-stack applications and thoughtful AI tools that make everyday tasks simpler.',
+  bio: 'I’m a software engineer with a background in Computer Science. I build full-stack applications and integrate AI into practical tools, from air-quality insights and content generation to personal finance.',
   socials: {
     github: 'https://github.com/richmondazadze',
     linkedin: 'https://www.linkedin.com/in/richmond-azadze',
@@ -43,7 +42,8 @@ export const techStack = [
 
 /** Whole years of experience since experienceStart. */
 export function yearsOfExperience() {
-  const start = new Date(site.experienceStart);
+  const [year, month, day] = site.experienceStart.split('-').map(Number);
+  const start = new Date(year, month - 1, day);
   const now = new Date();
   let years = now.getFullYear() - start.getFullYear();
   const beforeAnniversary =

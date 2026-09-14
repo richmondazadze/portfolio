@@ -1,153 +1,29 @@
+import ProjectName from '../components/ProjectName';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, ArrowUpRight, Github } from 'lucide-react';
-import { motion } from 'framer-motion';
-import Reveal from '../components/Reveal';
-import { EASE, inView } from '../lib/motion';
-import { getProject } from '../data/projects';
+import { ArrowLeft, ArrowUpRight, Github, ArrowRight } from 'lucide-react';
+import ProjectImage from '../components/ProjectImage';
+import projects, { getProject } from '../data/projects';
 
 export default function ProjectDetail() {
   const { slug } = useParams();
   const project = getProject(slug);
-
-  if (!project) {
-    return (
-      <div className="flex min-h-screen flex-col items-center justify-center bg-navy px-8 text-center">
-        <h1 className="font-display text-5xl uppercase tracking-tight text-white">
-          Project not found
-        </h1>
-        <Link
-          to="/work"
-          className="mt-8 inline-flex items-center gap-2 text-xs uppercase tracking-widest-xl text-sage"
-        >
-          <ArrowLeft size={16} /> Back to Work
-        </Link>
-      </div>
-    );
-  }
-
+  if (!project) return <div className="site-container flex min-h-[70vh] flex-col items-start justify-center gap-6 pt-28"><h1 className="section-title">Project not found.</h1><Link to="/work" className="button-secondary"><ArrowLeft size={18} /> Back to work</Link></div>;
+  const next = projects[(projects.indexOf(project) + 1) % projects.length];
   return (
-    <div className="bg-navy">
-      {/* Header */}
-      <section className="px-8 pb-16 pt-36 md:px-12 md:pb-20 md:pt-44">
-        <div className="mx-auto max-w-[1600px]">
-          <Link
-            to="/work"
-            className="group inline-flex items-center gap-2 text-xs uppercase tracking-widest-xl text-taupe transition-colors hover:text-white"
-          >
-            <ArrowLeft
-              size={16}
-              className="transition-transform duration-500 ease-fluid group-hover:-translate-x-1"
-            />
-            Back to Work
-          </Link>
-
-          <Reveal>
-            <p className="mt-12 text-xs uppercase tracking-widest-xl text-sage">
-              {project.category} · {project.year}
-            </p>
-          </Reveal>
-          <Reveal style={{ transitionDelay: '80ms' }}>
-            <h1 className="mt-6 font-display text-6xl uppercase leading-none tracking-tighter text-white sm:text-7xl md:text-8xl">
-              {project.title}
-            </h1>
-          </Reveal>
-          <Reveal style={{ transitionDelay: '160ms' }}>
-            <p className="mt-8 max-w-2xl text-lg font-light leading-relaxed text-taupe">
-              {project.description}
-            </p>
-          </Reveal>
-
-          <Reveal style={{ transitionDelay: '240ms' }} className="mt-10 flex flex-wrap gap-4">
-            <a
-              href={project.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex items-center gap-3 bg-white px-7 py-4 text-xs uppercase tracking-widest-xl text-navy transition-colors duration-500 ease-fluid hover:bg-sage"
-            >
-              Visit Live Site
-              <ArrowUpRight
-                size={16}
-                className="transition-transform duration-500 ease-fluid group-hover:translate-x-1 group-hover:-translate-y-1"
-              />
-            </a>
-            {project.github && (
-              <a
-                href={project.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 border border-white/30 px-7 py-4 text-xs uppercase tracking-widest-xl text-white transition-colors duration-500 ease-fluid hover:bg-white hover:text-navy"
-              >
-                <Github size={16} /> Source Code
-              </a>
-            )}
-          </Reveal>
-        </div>
-      </section>
-
-      {/* Cover image */}
-      <section className="px-8 md:px-12">
-        <Reveal className="mx-auto aspect-[16/9] max-w-[1600px] overflow-hidden bg-charcoal">
-          <motion.img
-            src={project.image}
-            alt={project.title}
-            initial={{ scale: 1.12, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
-            viewport={inView}
-            transition={{ duration: 1.3, ease: EASE }}
-            className="h-full w-full object-contain"
-          />
-        </Reveal>
-      </section>
-
-      {/* Details */}
-      <section className="px-8 py-28 md:px-12 md:py-40">
-        <div className="mx-auto grid max-w-[1600px] grid-cols-1 gap-16 lg:grid-cols-12">
-          {/* Tech stack */}
-          <div className="lg:col-span-4">
-            <Reveal>
-              <span className="text-xs uppercase tracking-widest-xl text-taupe">
-                Tech Stack
-              </span>
-            </Reveal>
-            <ul className="mt-8 space-y-4">
-              {project.tech.map((tech, i) => (
-                <Reveal
-                  as="li"
-                  key={tech}
-                  style={{ transitionDelay: `${i * 60}ms` }}
-                  className="group flex items-center gap-4 text-lg text-sage"
-                >
-                  <span className="h-px w-10 bg-sage transition-all duration-500 ease-fluid group-hover:w-16" />
-                  {tech}
-                </Reveal>
-              ))}
-            </ul>
-          </div>
-
-          {/* Features */}
-          <div className="lg:col-span-8">
-            <Reveal>
-              <span className="text-xs uppercase tracking-widest-xl text-taupe">
-                Key Features
-              </span>
-            </Reveal>
-            <div className="mt-8 grid grid-cols-1 gap-x-12 gap-y-6 sm:grid-cols-2">
-              {project.features.map((feature, i) => (
-                <Reveal
-                  key={feature}
-                  style={{ transitionDelay: `${i * 60}ms` }}
-                  className="flex items-start gap-4 border-t border-white/10 pt-6 text-white"
-                >
-                  <span className="font-display text-sm text-taupe">
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                  <span className="font-light leading-relaxed">{feature}</span>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
+    <article className="page-space">
+      <div className="site-container">
+        <Link to="/work" className="text-link text-sage"><ArrowLeft size={16} /> All projects</Link>
+        <header className="mt-8 grid gap-8 lg:grid-cols-[1.3fr_1fr] lg:items-end">
+          <div className="min-w-0"><p className="eyebrow">{project.category} <span className="mx-2">/</span> {project.year}</p><h1 className="page-title" style={{ fontSize: 'clamp(2.5rem, 6vw, 5.5rem)' }}><ProjectName name={project.title} /></h1></div>
+          <div><p className="max-w-lg text-lg leading-relaxed text-taupe">{project.summary}</p><div className="mt-6 flex flex-wrap gap-3"><a href={project.link} target="_blank" rel="noopener noreferrer" className="button-primary">Live site <ArrowUpRight size={17} /></a>{project.github && <a href={project.github} target="_blank" rel="noopener noreferrer" className="button-secondary"><Github size={17} /> Source code</a>}</div></div>
+        </header>
+        <ProjectImage key={project.slug} project={project} />
+        <section className="grid gap-10 py-14 lg:grid-cols-[1fr_2fr] lg:gap-20 lg:py-20" aria-label="Project overview">
+          <div><h2 className="eyebrow">Built with</h2><ul className="mt-5 flex flex-wrap gap-2">{project.tech.map(tech => <li key={tech} className="rounded-full border border-white/20 px-4 py-2 text-sm text-sage">{tech}</li>)}</ul></div>
+          <div><h2 className="font-display text-3xl uppercase">About the project</h2><p className="mt-5 max-w-3xl text-base leading-relaxed text-taupe md:text-lg">{project.description}</p><h3 className="eyebrow mt-10">What it does</h3><ul className="mt-5 grid gap-x-8 sm:grid-cols-2">{project.features.map((feature, i) => <li key={feature} className="flex gap-4 border-t border-white/15 py-5 text-base leading-relaxed"><span className="pt-1 text-xs text-sage">{String(i + 1).padStart(2, '0')}</span>{feature}</li>)}</ul></div>
+        </section>
+        <Link to={`/work/${next.slug}`} className="group flex items-center justify-between gap-6 rounded-xl border border-white/20 p-6 transition-colors hover:bg-white/5 md:p-10"><div className="min-w-0"><p className="eyebrow">Next project</p><h2 className="mt-3 font-display text-3xl uppercase sm:text-5xl"><ProjectName name={next.title} /></h2></div><ArrowRight className="shrink-0 transition-transform group-hover:translate-x-1" size={28} /></Link>
+      </div>
+    </article>
   );
 }

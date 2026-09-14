@@ -1,41 +1,11 @@
-import { motion } from 'framer-motion';
-import { EASE, inView } from '../lib/motion';
+import { motion, useReducedMotion } from 'framer-motion';
+import { EASE } from '../lib/motion';
 
-/**
- * Scroll-reveal wrapper (rise + fade) built on framer-motion.
- *
- * Back-compat: existing call sites pass `style={{ transitionDelay: '120ms' }}`
- * to stagger reveals — that value is read and converted into the animation's
- * delay, so those sites keep working without changes.
- */
-export default function Reveal({
-  as = 'div',
-  className = '',
-  style,
-  delay,
-  children,
-  ...props
-}) {
-  const MotionTag = motion[as] || motion.div;
-
-  let resolvedDelay = delay ?? 0;
-  const restStyle = { ...style };
-  if (restStyle.transitionDelay) {
-    resolvedDelay = parseFloat(restStyle.transitionDelay) / 1000;
-    delete restStyle.transitionDelay;
-  }
-
-  return (
-    <MotionTag
-      className={className}
-      style={restStyle}
-      initial={{ opacity: 0, y: 26 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={inView}
-      transition={{ duration: 0.9, ease: EASE, delay: resolvedDelay }}
-      {...props}
-    >
-      {children}
-    </MotionTag>
-  );
+const tags = {};
+export default function Reveal({ as = 'div', className = '', style, delay = 0, children, ...props }) {
+  const reduced = useReducedMotion();
+  const Tag = tags[as] || (tags[as] = motion.create(as));
+  const { transitionDelay, ...restStyle } = style || {};
+  const stagger = Math.min(transitionDelay ? parseFloat(transitionDelay) / 1000 : delay, 0.08);
+  return <Tag className={className} style={restStyle} initial={reduced ? false : { opacity: 0.85, y: 8 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '0px' }} transition={{ duration: reduced ? 0 : 0.3, ease: EASE, delay: reduced ? 0 : stagger }} {...props}>{children}</Tag>;
 }

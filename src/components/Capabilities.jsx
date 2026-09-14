@@ -8,14 +8,14 @@ import { capabilities } from '../data/site';
  */
 export default function Capabilities({ variant = 'light' }) {
   const dark = variant === 'dark';
-  const bg = dark ? 'bg-navy' : 'bg-[#fafafa]';
+  const bg = dark ? 'bg-navy' : 'light-surface';
   const heading = dark ? 'text-white' : 'text-navy';
   const line = dark ? 'bg-sage' : 'bg-navy';
   const listText = dark ? 'text-sage' : 'text-navy';
 
   return (
-    <section className={`${bg} px-8 py-28 md:px-12 md:py-40`}>
-      <div className="mx-auto grid max-w-[1600px] grid-cols-1 gap-16 lg:grid-cols-12">
+    <section className={`${bg} px-6 py-16 md:px-12 md:py-24`}>
+      <div className="mx-auto grid max-w-[1344px] grid-cols-1 gap-16 lg:grid-cols-12">
         {/* Columns 1-4: list */}
         <div className="lg:col-span-4">
           <Reveal>

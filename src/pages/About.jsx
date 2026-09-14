@@ -24,16 +24,16 @@ export default function About() {
   return (
     <div className="bg-navy">
       {/* Header */}
-      <section className="relative overflow-hidden px-8 pb-16 pt-40 md:px-12 md:pb-24 md:pt-48">
+      <section className="relative overflow-hidden px-6 pb-16 pt-32 md:px-12 md:pb-24 md:pt-40">
         <AmbientOrbs />
-        <div className="relative z-10 mx-auto max-w-[1600px]">
+        <div className="relative z-10 mx-auto max-w-[1344px]">
           <Reveal>
             <span className="text-xs uppercase tracking-widest-xl text-sage">
               About
             </span>
           </Reveal>
           <Reveal style={{ transitionDelay: '80ms' }}>
-            <h1 className="mt-6 font-display text-6xl uppercase leading-[0.9] tracking-tighter text-white sm:text-7xl md:text-8xl lg:text-[9rem]">
+            <h1 className="page-title">
               Hello, I&apos;m
               <br />
               <span className="text-outline">Richmond</span>
@@ -43,14 +43,14 @@ export default function About() {
       </section>
 
       {/* Bio + profile */}
-      <section className="px-8 pb-28 md:px-12 md:pb-40">
-        <div className="mx-auto grid max-w-[1600px] grid-cols-1 items-start gap-16 lg:grid-cols-2 lg:gap-24">
+      <section className="px-6 pb-16 md:px-12 md:pb-24">
+        <div className="mx-auto grid max-w-[1344px] grid-cols-1 items-start gap-16 lg:grid-cols-2 lg:gap-24">
           <Reveal className="relative order-2 lg:order-1">
             <div className="absolute -left-6 -top-6 h-full w-full bg-cyan/20 md:-left-10 md:-top-10" />
             <img
               src={site.profileImage}
               alt={site.name}
-              className="relative aspect-[4/5] w-full object-cover grayscale transition-all duration-700 ease-fluid hover:grayscale-0"
+              className="relative aspect-[4/5] w-full object-cover "
             />
           </Reveal>
 
@@ -61,8 +61,29 @@ export default function About() {
               </p>
             </Reveal>
 
+            <Reveal style={{ transitionDelay: '160ms' }} className="mt-7 flex flex-wrap gap-4">
+              <a
+                href={site.resume}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center gap-3 button-primary"
+              >
+                <FileText size={16} /> View CV
+              </a>
+              <Link
+                to="/work"
+                className="group inline-flex items-center gap-3 button-secondary"
+              >
+                View Projects
+                <ArrowUpRight
+                  size={16}
+                  className="transition-transform duration-500 ease-fluid group-hover:translate-x-1 group-hover:-translate-y-1"
+                />
+              </Link>
+            </Reveal>
+
             {/* Stats */}
-            <div className="mt-14 grid grid-cols-2 gap-8 border-t border-white/10 pt-10">
+            <div className="mt-8 grid grid-cols-2 gap-8 border-t border-white/10 pt-10">
               <Reveal>
                 <p className="font-display text-5xl text-white md:text-6xl">
                   {yearsOfExperience()}+
@@ -81,33 +102,14 @@ export default function About() {
               </Reveal>
             </div>
 
-            <Reveal style={{ transitionDelay: '160ms' }} className="mt-12 flex flex-wrap gap-4">
-              <a
-                href={site.resume}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group inline-flex items-center gap-3 bg-white px-7 py-4 text-xs uppercase tracking-widest-xl text-navy transition-colors duration-500 ease-fluid hover:bg-sage"
-              >
-                <FileText size={16} /> Download CV
-              </a>
-              <Link
-                to="/work"
-                className="group inline-flex items-center gap-3 border border-white/30 px-7 py-4 text-xs uppercase tracking-widest-xl text-white transition-colors duration-500 ease-fluid hover:bg-white hover:text-navy"
-              >
-                View Projects
-                <ArrowUpRight
-                  size={16}
-                  className="transition-transform duration-500 ease-fluid group-hover:translate-x-1 group-hover:-translate-y-1"
-                />
-              </Link>
-            </Reveal>
+
           </div>
         </div>
       </section>
 
       {/* Tech stack */}
-      <section className="bg-[#fafafa] px-8 py-28 md:px-12 md:py-40">
-        <div className="mx-auto max-w-[1600px]">
+      <section className="light-surface px-6 py-16 md:px-12 md:py-24">
+        <div className="mx-auto max-w-[1344px]">
           <Reveal>
             <span className="text-xs uppercase tracking-widest-xl text-taupe">
               Toolbox
@@ -119,19 +121,19 @@ export default function About() {
             </h2>
           </Reveal>
 
-          <div className="mt-16 grid grid-cols-3 gap-px overflow-hidden border border-navy/10 bg-navy/10 sm:grid-cols-4 lg:grid-cols-6">
+          <div className="mt-16 grid grid-cols-2 min-[400px]:grid-cols-3 gap-px overflow-hidden border border-navy/10 bg-navy/10 sm:grid-cols-4 lg:grid-cols-6">
             {techStack.map((tech, i) => (
               <Reveal
                 key={tech.name}
                 style={{ transitionDelay: `${(i % 6) * 60}ms` }}
-                className="group flex aspect-square flex-col items-center justify-center gap-3 bg-[#fafafa] p-4 transition-colors duration-500 hover:bg-white"
+                className="group flex aspect-square flex-col items-center justify-center gap-3 light-surface p-4 transition-colors duration-200 hover:bg-white"
               >
                 <img
                   src={tech.icon}
                   alt={tech.name}
-                  className="h-10 w-10 object-contain grayscale transition-all duration-500 ease-fluid group-hover:grayscale-0 sm:h-12 sm:w-12"
+                  className="h-10 w-10 object-contain  sm:h-12 sm:w-12"
                 />
-                <span className="text-center text-[0.65rem] uppercase tracking-widest-xl text-taupe">
+                <span className="text-center text-sm text-taupe">
                   {tech.name}
                 </span>
               </Reveal>
@@ -141,8 +143,8 @@ export default function About() {
       </section>
 
       {/* Approach */}
-      <section className="bg-charcoal px-8 py-28 md:px-12 md:py-40">
-        <div className="mx-auto max-w-[1600px]">
+      <section className="bg-charcoal px-6 py-16 md:px-12 md:py-24">
+        <div className="mx-auto max-w-[1344px]">
           <Reveal>
             <span className="text-xs uppercase tracking-widest-xl text-taupe">
               How I Work

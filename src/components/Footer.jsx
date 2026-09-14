@@ -1,58 +1,14 @@
-import { Link } from 'react-router-dom';
-import Reveal from './Reveal';
+import { Link, useLocation } from 'react-router-dom';
+import { ArrowUpRight } from 'lucide-react';
 import { site } from '../data/site';
 
-/**
- * Massive navy footer with 'Let's Create' heading and a sage email link.
- */
 export default function Footer() {
+  const { pathname } = useLocation();
   return (
-    <footer className="bg-navy px-8 pb-10 pt-28 md:px-12 md:pt-40">
-      <div className="mx-auto max-w-[1600px]">
-        <Reveal>
-          <p className="mb-6 text-xs uppercase tracking-widest-xl text-taupe">
-            Have a project in mind?
-          </p>
-          <Link
-            to="/contact"
-            className="inline-block font-display text-6xl uppercase leading-none tracking-tighter text-white transition-opacity duration-300 hover:opacity-80 sm:text-7xl md:text-8xl lg:text-9xl"
-          >
-            Let&apos;s Create
-          </Link>
-        </Reveal>
-
-        <Reveal style={{ transitionDelay: '120ms' }}>
-          <a
-            href={`mailto:${site.email}`}
-            className="mt-10 inline-block font-sans text-xl text-sage underline decoration-1 underline-offset-8 transition-opacity duration-300 hover:opacity-70 sm:text-2xl md:text-3xl"
-          >
-            {site.email}
-          </a>
-        </Reveal>
-
-        <div className="mt-28 flex flex-col gap-6 border-t border-white/10 pt-8 md:flex-row md:items-center md:justify-between">
-          <p className="text-xs uppercase tracking-widest-xl text-taupe">
-            &copy; {new Date().getFullYear()} {site.name}. All rights reserved.
-          </p>
-          <div className="flex gap-8">
-            <a
-              href={site.socials.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xs uppercase tracking-widest-xl text-white transition-opacity duration-300 hover:opacity-60"
-            >
-              LinkedIn
-            </a>
-            <a
-              href={site.socials.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xs uppercase tracking-widest-xl text-white transition-opacity duration-300 hover:opacity-60"
-            >
-              GitHub
-            </a>
-          </div>
-        </div>
+    <footer className="border-t border-white/15 bg-navy py-8 text-white">
+      <div className="site-container">
+        {pathname !== '/contact' && <div className="flex flex-col items-start justify-between gap-6 pb-12 pt-6 md:flex-row md:items-end md:pb-16"><div><p className="eyebrow">Have something in mind?</p><Link to="/contact" className="group mt-4 flex items-center gap-5 font-display text-4xl uppercase sm:text-6xl">Let’s build it. <ArrowUpRight className="h-8 w-8 shrink-0 transition-transform group-hover:translate-x-1 sm:h-12 sm:w-12" /></Link></div><a href={`mailto:${site.email}`} className="max-w-full break-all text-base text-sage underline underline-offset-4">{site.email}</a></div>}
+        <div className="flex flex-col justify-between gap-5 border-t border-white/10 pt-6 text-xs text-taupe sm:flex-row sm:items-center"><p>© {new Date().getFullYear()} {site.name}</p><div className="flex gap-6"><a href={site.socials.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-sm text-sage">LinkedIn</a><a href={site.socials.github} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-sm text-sage">GitHub</a></div></div>
       </div>
     </footer>
   );

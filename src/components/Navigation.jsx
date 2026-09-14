@@ -1,140 +1,64 @@
-import { useEffect, useState } from 'react';
-import { NavLink, Link } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
+import { NavLink, Link, useLocation } from 'react-router-dom';
+import { Menu, X, ArrowUpRight } from 'lucide-react';
 import { site } from '../data/site';
-import { EASE } from '../lib/motion';
 
-const menuVariants = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
-  exit: { transition: { staggerChildren: 0.04, staggerDirection: -1 } },
-};
-const menuItem = {
-  hidden: { opacity: 0, y: 30 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE } },
-  exit: { opacity: 0, y: 20, transition: { duration: 0.3, ease: EASE } },
-};
+const LINKS = [{ label: 'Work', to: '/work' }, { label: 'About', to: '/about' }, { label: 'Contact', to: '/contact' }];
 
-const LINKS = [
-  { label: 'Work', to: '/work' },
-  { label: 'About', to: '/about' },
-  { label: 'Contact', to: '/contact' },
-];
-
-/**
- * Fixed top bar. Desktop uses mix-blend-mode: difference so it inverts over
- * light/dark sections. Mobile opens a full navy overlay menu.
- */
 export default function Navigation() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { pathname } = useLocation();
+  const toggle = useRef(null);
+  const panel = useRef(null);
+  const light = pathname === '/work';
 
+  useEffect(() => { setOpen(false); }, [pathname]);
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    const update = () => setScrolled(window.scrollY > 24);
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    const media = window.matchMedia('(min-width: 768px)');
+    const close = () => { if (media.matches) setOpen(false); };
+    media.addEventListener('change', close);
+    return () => { window.removeEventListener('scroll', update); media.removeEventListener('change', close); };
   }, []);
-
-  // When scrolled, morph into a glass bar (readable white text on blur);
-  // otherwise stay transparent and invert against the section behind it.
-  const glass = scrolled && !open;
+  useEffect(() => {
+    if (!open) return;
+    const oldOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const background = [document.querySelector('main'), document.querySelector('footer')].filter(Boolean);
+    background.forEach(el => { el.inert = true; });
+    panel.current?.querySelector('a')?.focus();
+    const keyboard = e => {
+      if (e.key === 'Escape') { setOpen(false); toggle.current?.focus(); }
+      if (e.key === 'Tab') {
+        const items = [...document.querySelectorAll('[data-menu-focus]')];
+        const current = items.indexOf(document.activeElement);
+        e.preventDefault();
+        items[(current + (e.shiftKey ? -1 : 1) + items.length) % items.length]?.focus();
+      }
+    };
+    document.addEventListener('keydown', keyboard);
+    return () => {
+      document.body.style.overflow = oldOverflow;
+      background.forEach(el => { el.inert = false; });
+      document.removeEventListener('keydown', keyboard);
+    };
+  }, [open]);
+  const closeMenu = () => { setOpen(false); toggle.current?.focus(); };
 
   return (
     <>
-      <nav
-        className={`fixed inset-x-0 top-0 z-50 flex items-center justify-between px-8 text-white transition-all duration-500 ease-fluid md:px-12 ${
-          glass
-            ? 'border-b border-white/10 bg-navy/60 py-4 shadow-lg shadow-navy/20 backdrop-blur-xl md:py-5'
-            : 'border-b border-transparent bg-transparent py-6 md:py-8'
-        }`}
-        style={{ mixBlendMode: glass ? 'normal' : open ? 'normal' : 'difference' }}
-      >
-        <Link to="/" aria-label={`${site.name} — home`} className="inline-flex items-center">
-          <img
-            src="/ra-logo.webp"
-            alt={site.name}
-            width="64"
-            height="54"
-            className="h-7 w-auto md:h-8"
-          />
-        </Link>
-
-        <div className="hidden items-center gap-10 md:flex">
-          {LINKS.map((link) => (
-            <NavLink
-              key={link.label}
-              to={link.to}
-              className={({ isActive }) =>
-                `text-xs uppercase tracking-widest-xl transition-opacity duration-300 hover:opacity-60 ${
-                  isActive ? 'opacity-100' : 'opacity-70'
-                }`
-              }
-            >
-              {link.label}
-            </NavLink>
-          ))}
-        </div>
-
-        <Link
-          to="/contact"
-          className="hidden border border-white px-6 py-3 text-xs uppercase tracking-widest-xl transition-colors duration-500 ease-fluid hover:bg-white hover:text-navy md:inline-block"
-        >
-          Get in Touch
-        </Link>
-
-        {/* Mobile toggle */}
-        <button
-          onClick={() => setOpen((v) => !v)}
-          aria-label="Toggle menu"
-          className="text-white md:hidden"
-        >
-          {open ? <X size={26} /> : <Menu size={26} />}
-        </button>
-      </nav>
-
-      {/* Mobile overlay */}
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.35, ease: EASE }}
-            className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-10 bg-navy md:hidden"
-          >
-            <motion.div
-              variants={menuVariants}
-              initial="hidden"
-              animate="show"
-              exit="exit"
-              className="flex flex-col items-center gap-10"
-            >
-              {LINKS.map((link) => (
-                <motion.div key={link.label} variants={menuItem}>
-                  <NavLink
-                    to={link.to}
-                    onClick={() => setOpen(false)}
-                    className="font-display text-5xl uppercase tracking-tight text-white"
-                  >
-                    {link.label}
-                  </NavLink>
-                </motion.div>
-              ))}
-              <motion.div variants={menuItem}>
-                <Link
-                  to="/contact"
-                  onClick={() => setOpen(false)}
-                  className="mt-4 border border-white px-8 py-4 text-xs uppercase tracking-widest-xl text-white"
-                >
-                  Get in Touch
-                </Link>
-              </motion.div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <header className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-200 ${open ? 'border-white/10 bg-navy text-white' : light ? 'border-navy/10 bg-[#f7f8f5]/95 text-navy' : `text-white ${scrolled ? 'border-white/10 bg-navy/95' : 'border-transparent bg-navy'}`}`}>
+        <nav aria-label="Main navigation" className="site-container flex h-20 items-center justify-between gap-6">
+          <Link to="/" onClick={() => setOpen(false)} aria-label={`${site.name} — home`} data-menu-focus={open ? '' : undefined} className="flex min-h-11 min-w-11 items-center"><img src={light && !open ? '/ra-logo-black.png' : '/ra-logo.webp'} alt="" width="40" height="34" className="h-8 w-auto" /></Link>
+          <div className="hidden items-center gap-8 md:flex">{LINKS.map(link => <NavLink key={link.to} to={link.to} className={({ isActive }) => `inline-flex min-h-11 items-center border-b-2 text-sm font-medium transition-colors ${isActive ? 'border-current' : 'border-transparent opacity-75 hover:opacity-100'}`}>{link.label}</NavLink>)}</div>
+          <Link to="/contact" className={`hidden min-h-11 items-center gap-2 rounded-md px-5 text-sm font-semibold md:inline-flex ${light ? 'bg-navy text-white' : 'bg-white text-navy'}`}>Let’s talk <ArrowUpRight size={16} /></Link>
+          <button ref={toggle} onClick={() => open ? closeMenu() : setOpen(true)} aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} aria-controls="mobile-menu" data-menu-focus={open ? '' : undefined} className="flex h-11 w-11 items-center justify-center rounded-md md:hidden">{open ? <X size={24} /> : <Menu size={24} />}</button>
+        </nav>
+      </header>
+      {open && <nav ref={panel} id="mobile-menu" aria-label="Mobile navigation" className="fixed inset-0 z-40 flex flex-col justify-center gap-7 overflow-y-auto bg-navy px-8 pb-12 pt-24 text-white md:hidden">{LINKS.map(link => <NavLink key={link.to} to={link.to} data-menu-focus onClick={() => setOpen(false)} className={({ isActive }) => `flex items-center justify-between border-b border-white/15 py-4 font-display text-5xl uppercase ${isActive ? 'text-sage' : ''}`}>{link.label}<ArrowUpRight size={28} /></NavLink>)}<p className="mt-4 text-sm text-taupe">Software engineering. Thoughtfully built.</p></nav>}
     </>
   );
 }

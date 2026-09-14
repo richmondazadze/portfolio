@@ -1,193 +1,44 @@
-import { useState } from 'react';
-import { ArrowUpRight, Check } from 'lucide-react';
-import Reveal from '../components/Reveal';
+import { useEffect, useRef, useState } from 'react';
+import { ArrowUpRight, Check, LoaderCircle } from 'lucide-react';
 import { site } from '../data/site';
+import { sendContact } from '../lib/contact';
 
 const INITIAL = { name: '', email: '', message: '' };
-
 export default function Contact() {
   const [form, setForm] = useState(INITIAL);
-  const [status, setStatus] = useState('idle'); // idle | sending | success | error
-
-  const handleChange = (e) =>
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-
-  const handleSubmit = async (e) => {
+  const [status, setStatus] = useState('idle');
+  const success = useRef(null);
+  const first = useRef(null);
+  useEffect(() => { if (status === 'success') success.current?.focus(); }, [status]);
+  const change = e => setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  const submit = async e => {
     e.preventDefault();
+    if (status === 'sending') return;
     setStatus('sending');
-    try {
-      const res = await fetch(`https://formsubmit.co/ajax/${site.email}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({ ...form, _captcha: 'false', _template: 'table' }),
-      });
-      if (!res.ok) throw new Error('Request failed');
-      setStatus('success');
-      setForm(INITIAL);
-    } catch {
-      setStatus('error');
-    }
+    try { await sendContact(form, site.email); setStatus('success'); setForm(INITIAL); }
+    catch { setStatus('error'); }
   };
-
   return (
-    <div className="bg-navy">
-      <section className="px-8 pb-28 pt-40 md:px-12 md:pb-40 md:pt-48">
-        <div className="mx-auto grid max-w-[1600px] grid-cols-1 gap-16 lg:grid-cols-12 lg:gap-24">
-          {/* Left: intro + direct links */}
-          <div className="lg:col-span-5">
-            <Reveal>
-              <span className="text-xs uppercase tracking-widest-xl text-sage">
-                Contact
-              </span>
-            </Reveal>
-            <Reveal style={{ transitionDelay: '80ms' }}>
-              <h1 className="mt-6 font-display text-6xl uppercase leading-none tracking-tighter text-white sm:text-7xl md:text-8xl">
-                Let&apos;s Talk
-              </h1>
-            </Reveal>
-            <Reveal style={{ transitionDelay: '160ms' }}>
-              <p className="mt-8 max-w-md text-base font-light leading-relaxed text-taupe">
-                Have a project, a role, or an idea to discuss? Send a message or
-                reach me directly — I&apos;ll get back to you.
-              </p>
-            </Reveal>
-
-            <div className="mt-14 space-y-6">
-              <Reveal>
-                <a
-                  href={`mailto:${site.email}`}
-                  className="group block border-t border-white/10 pt-6"
-                >
-                  <span className="text-xs uppercase tracking-widest-xl text-taupe">
-                    Email
-                  </span>
-                  <span className="mt-2 flex items-center justify-between text-lg text-white">
-                    {site.email}
-                    <ArrowUpRight
-                      size={18}
-                      className="text-sage transition-transform duration-500 ease-fluid group-hover:translate-x-1 group-hover:-translate-y-1"
-                    />
-                  </span>
-                </a>
-              </Reveal>
-              {[
-                { label: 'LinkedIn', href: site.socials.linkedin },
-                { label: 'GitHub', href: site.socials.github },
-              ].map((s, i) => (
-                <Reveal key={s.label} style={{ transitionDelay: `${(i + 1) * 80}ms` }}>
-                  <a
-                    href={s.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group block border-t border-white/10 pt-6"
-                  >
-                    <span className="text-xs uppercase tracking-widest-xl text-taupe">
-                      Social
-                    </span>
-                    <span className="mt-2 flex items-center justify-between text-lg text-white">
-                      {s.label}
-                      <ArrowUpRight
-                        size={18}
-                        className="text-sage transition-transform duration-500 ease-fluid group-hover:translate-x-1 group-hover:-translate-y-1"
-                      />
-                    </span>
-                  </a>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-
-          {/* Right: form */}
-          <div className="lg:col-span-7">
-            {status === 'success' ? (
-              <Reveal className="flex h-full min-h-[300px] flex-col items-start justify-center border border-white/10 p-10">
-                <span className="flex h-16 w-16 items-center justify-center rounded-full bg-sage text-navy">
-                  <Check size={28} />
-                </span>
-                <h2 className="mt-8 font-display text-4xl uppercase tracking-tight text-white">
-                  Message Sent
-                </h2>
-                <p className="mt-4 max-w-sm font-light leading-relaxed text-taupe">
-                  Thanks for reaching out — I&apos;ll get back to you soon.
-                </p>
-                <button
-                  onClick={() => setStatus('idle')}
-                  className="mt-8 text-xs uppercase tracking-widest-xl text-sage underline underline-offset-8"
-                >
-                  Send another
-                </button>
-              </Reveal>
-            ) : (
-              <Reveal as="form" onSubmit={handleSubmit} className="space-y-10">
-                <Field
-                  label="Your Name"
-                  name="name"
-                  value={form.name}
-                  onChange={handleChange}
-                />
-                <Field
-                  label="Your Email"
-                  name="email"
-                  type="email"
-                  value={form.email}
-                  onChange={handleChange}
-                />
-                <div>
-                  <label className="text-xs uppercase tracking-widest-xl text-taupe">
-                    Your Message
-                  </label>
-                  <textarea
-                    name="message"
-                    required
-                    rows={5}
-                    value={form.message}
-                    onChange={handleChange}
-                    className="mt-4 w-full resize-none border-b border-white/20 bg-transparent pb-3 text-lg text-white outline-none transition-colors duration-300 placeholder:text-white/30 focus:border-sage"
-                    placeholder="Tell me about it…"
-                  />
-                </div>
-
-                {status === 'error' && (
-                  <p className="text-sm text-beige">
-                    Something went wrong. Please try again or email me directly.
-                  </p>
-                )}
-
-                <button
-                  type="submit"
-                  disabled={status === 'sending'}
-                  className="group inline-flex items-center gap-3 bg-white px-8 py-4 text-xs uppercase tracking-widest-xl text-navy transition-colors duration-500 ease-fluid hover:bg-sage disabled:opacity-50"
-                >
-                  {status === 'sending' ? 'Sending…' : 'Send Message'}
-                  <ArrowUpRight
-                    size={16}
-                    className="transition-transform duration-500 ease-fluid group-hover:translate-x-1 group-hover:-translate-y-1"
-                  />
-                </button>
-              </Reveal>
-            )}
-          </div>
+    <div className="page-space">
+      <div className="site-container grid gap-x-16 gap-y-8 lg:grid-cols-2">
+        <header><p className="eyebrow">Get in touch</p><h1 className="page-title">Let’s talk.</h1><p className="page-description">Have a project, a role, or an idea in mind? I’d love to hear about it.</p></header>
+        <div className="lg:col-start-2 lg:row-span-2 lg:row-start-1">
+          {status === 'success' ? <section className="rounded-xl border border-white/20 p-6 sm:p-10" aria-labelledby="success-title"><Check size={32} className="text-sage" /><h2 ref={success} tabIndex={-1} id="success-title" className="mt-6 font-display text-4xl uppercase focus:outline-none">Message sent.</h2><p className="mt-4 leading-relaxed text-taupe">Thanks for reaching out. I’ll get back to you soon.</p><button onClick={() => { setStatus('idle'); requestAnimationFrame(() => first.current?.focus()); }} className="button-secondary mt-8">Send another message</button></section> :
+          <form onSubmit={submit} aria-busy={status === 'sending'} className="rounded-xl border border-white/15 bg-white/[.025] p-5 sm:p-8">
+            <fieldset disabled={status === 'sending'} className="space-y-6 disabled:opacity-70">
+              <legend className="sr-only">Send a message</legend>
+              <div><label htmlFor="contact-name" className="form-label">Your name</label><input ref={first} id="contact-name" name="name" autoComplete="name" required maxLength={120} value={form.name} onChange={change} className="form-control" placeholder="Alex Morgan" /></div>
+              <div><label htmlFor="contact-email" className="form-label">Email address</label><input id="contact-email" name="email" type="email" autoComplete="email" required value={form.email} onChange={change} className="form-control" placeholder="alex@example.com" /></div>
+              <div><label htmlFor="contact-message" className="form-label">Your message</label><textarea id="contact-message" name="message" required rows={5} maxLength={5000} value={form.message} onChange={change} className="form-control resize-y" placeholder="Tell me about your project or opportunity…" /></div>
+              <p className="text-xs text-taupe">All fields are required.</p>
+              {status === 'error' && <p role="alert" className="rounded-md border border-beige/30 p-3 text-sm leading-relaxed text-beige">Your message wasn’t sent. Your draft is still here—please try again or <a className="underline" href={`mailto:${site.email}`}>email me directly</a>.</p>}
+              <button type="submit" className="button-primary w-full disabled:opacity-60">{status === 'sending' ? <><LoaderCircle size={17} className="animate-spin" /> Sending…</> : <>Send message <ArrowUpRight size={17} /></>}</button>
+            </fieldset>
+            <p className="sr-only" role="status">{status === 'sending' ? 'Sending your message' : ''}</p>
+          </form>}
         </div>
-      </section>
-    </div>
-  );
-}
-
-function Field({ label, name, value, onChange, type = 'text' }) {
-  return (
-    <div>
-      <label className="text-xs uppercase tracking-widest-xl text-taupe">
-        {label}
-      </label>
-      <input
-        type={type}
-        name={name}
-        required
-        value={value}
-        onChange={onChange}
-        className="mt-4 w-full border-b border-white/20 bg-transparent pb-3 text-lg text-white outline-none transition-colors duration-300 placeholder:text-white/30 focus:border-sage"
-        placeholder="…"
-      />
+        <aside className="min-w-0 lg:col-start-1 lg:row-start-2"><p className="text-sm text-taupe">Prefer to reach out directly?</p><a href={`mailto:${site.email}`} className="mt-3 inline-block max-w-full break-all text-base text-sage underline underline-offset-4 sm:text-lg">{site.email}</a><div className="mt-6 flex gap-6">{Object.entries(site.socials).map(([label, href]) => <a key={label} href={href} target="_blank" rel="noopener noreferrer" className="text-link capitalize">{label === 'linkedin' ? 'LinkedIn' : 'GitHub'} <ArrowUpRight size={16} /></a>)}</div></aside>
+      </div>
     </div>
   );
 }

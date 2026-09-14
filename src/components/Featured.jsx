@@ -21,7 +21,7 @@ export default function Featured() {
           <div className="absolute -left-6 -top-6 h-full w-full bg-cyan/20 md:-left-12 md:-top-12" />
           <Link
             to={`/work/${project.slug}`}
-            className="relative block aspect-[16/10] overflow-hidden bg-charcoal"
+            className="relative flex aspect-[4/3] items-center justify-center overflow-hidden rounded-xl bg-gradient-to-br from-charcoal to-navy p-8 md:p-12"
           >
             <motion.img
               src={project.image}
@@ -31,7 +31,7 @@ export default function Featured() {
               whileInView={{ scale: 1, opacity: 1 }}
               viewport={inView}
               transition={{ duration: 1.2, ease: EASE }}
-              className="h-full w-full object-contain grayscale transition-[filter] duration-700 ease-fluid hover:grayscale-0"
+              className="max-h-full max-w-full rounded-lg shadow-[0_25px_60px_-15px_rgba(0,0,0,0.6)] ring-1 ring-white/5 grayscale transition-[filter,transform] duration-700 ease-fluid hover:grayscale-0"
             />
           </Link>
         </Reveal>
@@ -52,7 +52,7 @@ export default function Featured() {
             to={`/work/${project.slug}`}
             className="group mt-10 inline-flex items-center gap-3 text-sm uppercase tracking-widest-xl text-white"
           >
-            View Case Study
+            View project
             <ArrowUpRight
               size={20}
               className="transition-transform duration-500 ease-fluid group-hover:translate-x-2"

@@ -6,7 +6,7 @@ export default {
       colors: {
         navy: '#171e19',
         sage: '#b7c6c2',
-        taupe: '#9f8d8b',
+        taupe: '#b1bab3',
         beige: '#d7c5b2',
         cyan: '#d5f4f9',
         softblue: '#bbe2f5',

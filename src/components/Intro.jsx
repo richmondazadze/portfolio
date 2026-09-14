@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import Reveal from './Reveal';
-import { site, yearsOfExperience } from '../data/site';
+import { yearsOfExperience } from '../data/site';
+import { totalProjectsCount } from '../data/projects';
 
 /**
  * Light intro band on the home page — a large editorial statement plus a
@@ -9,8 +10,8 @@ import { site, yearsOfExperience } from '../data/site';
  */
 export default function Intro() {
   return (
-    <section className="bg-white px-8 py-28 md:px-12 md:py-40">
-      <div className="mx-auto max-w-[1600px]">
+    <section className="light-surface px-6 pt-16 md:px-12 md:pt-24">
+      <div className="mx-auto max-w-[1344px]">
         <Reveal>
           <span className="text-xs uppercase tracking-widest-xl text-taupe">
             Introduction
@@ -25,7 +26,7 @@ export default function Intro() {
           </h2>
         </Reveal>
 
-        <div className="mt-20 grid grid-cols-2 gap-10 border-t border-navy/10 pt-12 md:grid-cols-4">
+        <div className="mt-10 grid grid-cols-2 gap-6 border-t border-navy/10 pt-12 md:grid-cols-4">
           <Reveal>
             <p className="font-display text-5xl text-navy md:text-6xl">
               {yearsOfExperience()}+
@@ -35,7 +36,7 @@ export default function Intro() {
             </p>
           </Reveal>
           <Reveal style={{ transitionDelay: '80ms' }}>
-            <p className="font-display text-5xl text-navy md:text-6xl">5</p>
+            <p className="font-display text-5xl text-navy md:text-6xl">{totalProjectsCount}</p>
             <p className="mt-3 text-xs uppercase tracking-widest-xl text-taupe">
               Shipped Projects
             </p>
@@ -49,7 +50,7 @@ export default function Intro() {
           <Reveal style={{ transitionDelay: '240ms' }} className="flex items-end">
             <Link
               to="/about"
-              className="group inline-flex items-center gap-2 text-sm uppercase tracking-widest-xl text-navy"
+              className="text-link text-navy"
             >
               More about me
               <ArrowUpRight

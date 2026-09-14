@@ -3,6 +3,7 @@
 const projects = [
   {
     slug: 'atmowise',
+    summary: 'Air quality data and AI health insights, together in one dashboard.',
     title: 'AtmoWise',
     category: 'AI · Web App',
     year: '2025',
@@ -23,6 +24,7 @@ const projects = [
   },
   {
     slug: 'sankpost-ai',
+    summary: 'Create social content that fits your brand voice, in seconds.',
     title: 'Sankpost AI',
     category: 'AI · SaaS',
     year: '2025',
@@ -44,6 +46,7 @@ const projects = [
   },
   {
     slug: 'pennytrack',
+    summary: 'A simpler way to track expenses and understand your spending.',
     title: 'PennyTrack',
     category: 'Full-Stack · Fintech',
     year: '2024',
@@ -64,6 +67,7 @@ const projects = [
   },
   {
     slug: 'ai-summarizer',
+    summary: 'Turn long articles into clear, concise summaries with a URL.',
     title: 'Article Summarizer',
     category: 'AI · Tool',
     year: '2024',
@@ -84,6 +88,7 @@ const projects = [
   },
   {
     slug: 'richverse-ecotech',
+    summary: 'A digital home for technology and sustainability services.',
     title: 'RichverseEcoTech',
     category: 'Web · Corporate',
     year: '2024',
