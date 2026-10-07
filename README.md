@@ -25,6 +25,8 @@ motion. Content migrated from the previous portfolio.
 
 ## Content
 
+Folio has an independent product section at `/folio`, with public `/folio/support` and `/folio/privacy` pages. It uses the portfolio's publisher identity and public contact email from `src/data/site.js`. The App Store launch is pending; the page says "Coming to iPhone" until approval. Update the download CTA after release. Local fonts include their licences in `public/folio/fonts/`. SPA deep-link fallbacks are supplied for Vercel and Netlify; configure equivalent rewrites on another host before using the support/privacy URLs in App Store Connect.
+
 - Identity, bio, roles, socials, resume, email: `src/data/site.js`
 - Projects (with slugs, tech, features, links): `src/data/projects.js`
 - Assets (images, resume, tech logos): `public/` and `public/tech/`

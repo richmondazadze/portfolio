@@ -11,9 +11,11 @@ const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
 const About = lazy(() => import('./pages/About'));
 const Contact = lazy(() => import('./pages/Contact'));
 const NotFound = lazy(() => import('./pages/NotFound'));
+const Folio = lazy(() => import('./pages/Folio'));
 
 export default function App() {
   const { pathname } = useLocation();
+  const folioPage = pathname === '/folio' || pathname.startsWith('/folio/');
   useEffect(() => {
     const prefetch = () => Promise.all([import('./pages/Work'), import('./pages/About'), import('./pages/Contact'), import('./pages/ProjectDetail')]).catch(() => {});
     if (window.requestIdleCallback) {
@@ -27,7 +29,7 @@ export default function App() {
     <div className="bg-navy">
       <a href="#main-content" className="skip-link">Skip to content</a>
       <ScrollToTop />
-      <Navigation />
+      {!folioPage && <Navigation />}
       <ScrollProgress key={pathname} />
       <main id="main-content" tabIndex={-1} className="focus:outline-none">
         <Suspense fallback={<div className="site-container min-h-screen pt-40" role="status">Loading page…</div>}>
@@ -38,12 +40,15 @@ export default function App() {
             <Route path="/work/:slug" element={<ProjectDetail />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/folio" element={<Folio page="home" />} />
+            <Route path="/folio/support" element={<Folio page="support" />} />
+            <Route path="/folio/privacy" element={<Folio page="privacy" />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           </div>
         </Suspense>
       </main>
-      <Footer />
+      {!folioPage && <Footer />}
     </div>
   );
 }

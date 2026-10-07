@@ -2,6 +2,19 @@
 // `slug` is used for routing (/work/:slug); `featured` items surface on the home page.
 const projects = [
   {
+    slug: 'folio',
+    title: 'Folio',
+    summary: 'A quieter place to read, listen, and build a library of your own.',
+    category: 'iOS · Reading & Audio',
+    year: '2026',
+    description: 'Folio brings reading and listening together in a personal iPhone library. Discover free classics, import EPUB, PDF and text files, and switch to narration while keeping your place. An original editorial interface pairs warm paper surfaces with forest green accents. Bundled neural voices run on the device, alongside Apple’s device narration.',
+    image: '/folio/showcase.svg',
+    link: '/folio',
+    tech: ['React Native', 'Expo', 'TypeScript', 'Core ML', 'SQLite'],
+    features: ['Free-book discovery and offline reading', 'PDF, EPUB and text imports, including scanned PDF recognition', 'On-device neural narration with Heart and Michael', 'Passage search, private notes and bookmarks', 'Reading goals and personal library shelves', 'Adjustable typography, night mode and sleep timer'],
+    featured: true,
+  },
+  {
     slug: 'atmowise',
     summary: 'Air quality data and AI health insights, together in one dashboard.',
     title: 'AtmoWise',
